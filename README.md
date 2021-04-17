@@ -55,5 +55,17 @@ For web assignment3
 
 ![](imgs/post2.png)
 
+### Some design ideas
+
+1. It may be a good idea to use `react-uuid` to generate unique id for both `users` and `posts` to interact with the database.
+2. The reason why `users` and `posts` both contain the property `timestamp` is because we need it to display components in time order. Also, it's easy to get the actual date and time from the timestamp, for example:
+   ```Javascript
+   >> a = new Date().getTime()
+   1618696645490
+   >> b = new Date(a)
+   >> b.toLocaleString()
+   "4/17/2021, 2:57:25 PM"
+   ```
+
 ### RESTful API(todo)
 
