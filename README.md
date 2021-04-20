@@ -67,5 +67,42 @@ For web assignment3
    "4/17/2021, 2:57:25 PM"
    ```
 
-### RESTful API(todo)
+### RESTful API
+
+**/api/posts**
+
+GET: localhost:8000/api/posts
+```JSON
+  {
+    "CPoPrlvrO7nkNt3dQh8Y": {
+        "title": "Post from local",
+        "userID": "Chang001",
+        "timestamp": "1618942077477",
+        "username": "Chang Xu",
+        "url": "",
+        "text": "Some random text",
+        "type": "TEXT"
+    },
+    "D5uub8XH7P7fdNAnAXRA": {
+        "username": "Sam",
+        "timestamp": "1618685580325",
+        "userID": "Sam001",
+        "title": "Google",
+        "type": "LINK",
+        "url": "https://www.google.com/",
+        "text": ""
+    },
+    "quXGSWy85I4NjfxY7rJR": {
+        "type": "TEXT",
+        "text": "asdjhoaihiouasouahsfouhasoufhaoushfoiashfasf",
+        "url": "",
+        "userID": "someid",
+        "username": "Tony",
+        "title": "Test Title",
+        "timestamp": "1618686341009"
+    }
+  }
+```
+
+POST: localhost:8000/api/posts
 
