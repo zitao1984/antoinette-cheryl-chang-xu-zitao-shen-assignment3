@@ -1,0 +1,20 @@
+{
+  "D5uub8XH7P7fdNAnAXRA": {
+    "userID": "Sam001",
+    "type": "LINK",
+    "timestamp": "1618685580325",
+    "title": "Google",
+    "text": "",
+    "username": "Sam",
+    "url": "https://www.google.com/"
+  },
+  "quXGSWy85I4NjfxY7rJR": {
+    "type": "TEXT",
+    "url": "",
+    "timestamp": "1618686341009",
+    "userID": "someid",
+    "username": "Tony",
+    "text": "asdjhoaihiouasouahsfouhasoufhaoushfoiashfasf",
+    "title": "Test Title"
+  }
+}
