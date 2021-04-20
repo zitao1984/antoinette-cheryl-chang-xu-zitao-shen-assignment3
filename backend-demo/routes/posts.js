@@ -62,7 +62,7 @@ router.put("/", (req, res) => {
   const postID = req.query.postID;
   db.collection("posts").doc(postID).update(req.body)
   .then(() => {
-    console.log("Update complete");
+    console.log("Post update complete");
     res.status(200).send();
   })
   .catch(error => {

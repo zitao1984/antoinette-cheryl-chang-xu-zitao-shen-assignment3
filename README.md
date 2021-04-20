@@ -29,31 +29,26 @@ For web assignment3
 
 ### Mock Data
 
+#### user
 
-**Users**: Each user has two properties, all properties are `string`:
+Each user has two properties, all properties are `string`:
 + username
 + password (todo: encryption)
 
 ![](imgs/user1.png)
 
-**Posts**: Each post has one sub-collection **Comments** and five properties, all properties are `string`:
-+ Sub-collection: comments
-+ Properties
-  + creator: The user who creates the post.
-  + title: Title of the post
-  + *body*: Plain text in the post.
-  + *url*: An url
-    + Note: A post can only have either *body* or *url* that is not-null. For example, if *body* is not null, then *url* has to be null, vice versa.
-  + timestamp: Use `new Date().getTime()` to generate when creating the post.
+#### post
 
+
+Type: `TEXT`
 ![](imgs/post1.png)
 
-**Comments**: Sub-collection of posts. Has 3 properties, all properties are `string`:
-+ commentor: The user who leaves the comment.
-+ text: Plain text of the comment.
-+ timestamp: Use `new Date().getTime()` to generate when leaving the comment.
-
+Type: `LINK`
 ![](imgs/post2.png)
+
+#### comment
+
+![](imgs/comment1.png)
 
 ### Some design ideas
 
@@ -69,9 +64,12 @@ For web assignment3
 
 ### RESTful API
 
-**/api/posts**
+Demo of every API. Please check the source code under `/routes` folder for detailed information.
+
+#### **/api/posts**
 
 GET: localhost:8000/api/posts
+
 ```JSON
   {
     "CPoPrlvrO7nkNt3dQh8Y": {
@@ -105,4 +103,62 @@ GET: localhost:8000/api/posts
 ```
 
 POST: localhost:8000/api/posts
++ The request body should be in the format of [post](#post)
 
+```
+  WjKIkm2iVdYGkQm4O4cC (Auto-generated postID by Firestore)
+```
+
+PUT: localhost:8000/api/posts?postID=D5uub8XH7P7fdNAnAXRA
++ The request body should be in the format of [post](#post)
+
+```
+  No response, only status code 200 or 404
+```
+
+DELETE: localhost:8000/api/posts?postID=QLySgjJRnpdXnh9Ubdx1
+
+```
+  No response, only status code 200 or 404
+```
+
+#### **/api/comments**
+
+GET: localhost:8000/api/comments?postID=CPoPrlvrO7nkNt3dQh8Y
+
+```JSON
+  {
+    "3TF0DEgoCV0sFXqSMzjE": {
+        "userID": "Sam001",
+        "username": "Sam",
+        "text": "Test posting a comment",
+        "timestamp": "1618943757458"
+    },
+    "gKfSsNwQfdzBrqUm7HPP": {
+        "userID": "Sam001",
+        "text": "Test posting a comment",
+        "timestamp": "1618943757458",
+        "username": "Sam"
+    }
+  }
+```
+
+POST: localhost:8000/api/comments?postID=CPoPrlvrO7nkNt3dQh8Y
++ The request body should be in the format of [comment](#comment)
+
+```
+  kcNfB2SV86fOcflQXvua (Auto-generated commentID by Firestore)
+```
+
+PUT: localhost:8000/api/comments?postID=CPoPrlvrO7nkNt3dQh8Y&commentID=3TF0DEgoCV0sFXqSMzjE
++ The request body should be in the format of [comment](#comment)
+
+```
+  No response, only status code 200 or 404
+```
+
+DELETE: localhost:8000/api/comments?postID=CPoPrlvrO7nkNt3dQh8Y&commentID=3TF0DEgoCV0sFXqSMzjE
+
+```
+  No response, only status code 200 or 404
+```
