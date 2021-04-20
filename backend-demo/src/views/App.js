@@ -1,14 +1,16 @@
-import {Provider} from "react-redux"; // Automatically passes the store to all child components
-import store from "../redux/store"; // The store and main reducer
-import DisplayOnly from "../components/DisplayOnly";
-import UpdateOnly from "../components/UpdateOnly";
-import DisplayAndUpdate from "../components/DisplayAndUpdate";
+import { Provider, useDispatch } from "react-redux";
+import { ACTIONS } from "../redux/actions";
+import store from "../redux/store"; 
+import MainView from "./MainView";
 
-const App = () => 
-  <Provider store={store}>
-    <DisplayOnly />
-    <UpdateOnly />
-    <DisplayAndUpdate />
-  </Provider>
+const App = () => {
+
+  const dispatch = useDispatch();
+  dispatch(ACTIONS.getPosts());
+
+  return (
+      <MainView />
+  );
+}
 
 export default App;

@@ -1,2 +1,6 @@
-export const INCREMENT_PROP2 = "INCREMENT_PROP2";
-export const UPDATE_PROP1 = "UPDATE_PROP1";
+export const ACTION_TYPES = {
+
+  GET_POSTS: "GET_POSTS",
+  POST_POST: "POST_POST",
+
+};

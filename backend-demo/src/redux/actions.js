@@ -1,14 +1,31 @@
-import firebase from "../fbConfig";
-import { UPDATE_PROP1, INCREMENT_PROP2 } from "./actionConstants";
+import Axios from 'axios';
+import { ACTION_TYPES } from './actionConstants';
 
-// Action creator functions
-export const setProp1 = (val) => ({
-    type: UPDATE_PROP1,
-    payload: {
-        prop1: val
+// const simple_action = {
+//   type: "",
+//   payload: {
+
+//   }
+// }
+
+export const ACTIONS = {
+
+  updateLocalPosts: (posts) => ({type: ACTION_TYPES.GET_POSTS, payload: {posts}}),
+
+  getPosts: () => {
+
+    return dispatch => {
+
+      Axios.get("/api/posts")
+      .then(res => {
+        console.log("Getting all posts done.")
+        console.log(res.data);
+        dispatch(ACTIONS.updateLocalPosts(res.data))
+      })
+      .catch(error => console.log(error));
+
     }
-});
 
-export const setProp2 = () => ({
-    type: INCREMENT_PROP2
-})
+  },
+
+}
