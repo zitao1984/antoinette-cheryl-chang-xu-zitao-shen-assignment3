@@ -1,9 +1,8 @@
-# Antoinette-Cheryl-Chang-Xu-Zitao-Shen-assignment3
-For web assignment3
+# Backend Documentation
 
-## Chang Xu (backend)
+Author: Chang Xu
 
-### Firebase Configuration
+## Firebase Configuration
 
 ``` JavaScript
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -13,7 +12,7 @@ For web assignment3
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
 <script>
-  // Your web app's Firebase configuration
+  // Your web app's Firåebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyBZSMopHy80jczFnydpyHs6nVk6FEE2TKU",
     authDomain: "cs5610-d40ea.firebaseapp.com",
@@ -27,18 +26,9 @@ For web assignment3
 </script>
 ```
 
-### Mock Data
+## Data Format
 
-#### user
-
-Each user has two properties, all properties are `string`:
-+ username
-+ password (todo: encryption)
-
-![](imgs/user1.png)
-
-#### post
-
+### post
 
 Type: `TEXT`
 ![](imgs/post1.png)
@@ -46,11 +36,11 @@ Type: `TEXT`
 Type: `LINK`
 ![](imgs/post2.png)
 
-#### comment
+### comment
 
 ![](imgs/comment1.png)
 
-### Some design ideas
+## Some design ideas
 
 1. It may be a good idea to use `react-uuid` to generate unique id for both `users` and `posts` to interact with the database.
 2. The reason why `users` and `posts` both contain the property `timestamp` is because we need it to display components in time order. Also, it's easy to get the actual date and time from the timestamp, for example:
@@ -62,11 +52,11 @@ Type: `LINK`
    "4/17/2021, 2:57:25 PM"
    ```
 
-### RESTful API
+## RESTful API
 
 Demo of every API. Please check the source code under `/routes` folder for detailed information.
 
-#### **/api/posts**
+### **/api/posts**
 
 GET: localhost:8000/api/posts
 
@@ -122,7 +112,7 @@ DELETE: localhost:8000/api/posts?postID=QLySgjJRnpdXnh9Ubdx1
   No response, only status code 200 or 404
 ```
 
-#### **/api/comments**
+### **/api/comments**
 
 GET: localhost:8000/api/comments?postID=CPoPrlvrO7nkNt3dQh8Y
 
