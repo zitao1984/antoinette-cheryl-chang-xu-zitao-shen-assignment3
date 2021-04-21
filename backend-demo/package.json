@@ -1,5 +1,9 @@
 {
   "name": "backend-demo",
+  "author": {
+    "name": "Chang Xu",
+    "email": "xu.chang1@northeastern.edu"
+  },
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8000",
@@ -19,7 +23,9 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",
     "react-scripts": "4.0.3",
+    "react-uuid": "^1.0.2",
     "redux-thunk": "^2.3.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
