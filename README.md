@@ -2,7 +2,24 @@
 
 Author: Chang Xu
 
+## Some design ideas
+
+1. It may be a good idea to use `react-uuid` to generate unique id for both `users` and `posts` to interact with the database.
+2. The reason why `users` and `posts` both contain the property `timestamp` is because we need it to display components in time order. Also, it's easy to get the actual date and time from the timestamp, for example:
+   ```Javascript
+   >> a = new Date().getTime()
+   1618696645490
+   >> b = new Date(a)
+   >> b.toLocaleString()
+   "4/17/2021, 2:57:25 PM"
+   ```
+  **Note**: The type of `timestamp` is **number**, not string.
+
+3. A demo showing how to use `Axios` with `redux-think` to send HTTP request asynchronously and update the frontend state is provided. It could be run locally, or visit [here](https://cs5610-pj3-backend-demo.herokuapp.com/) to see.
+
 ## Firebase Configuration
+
+A sample configuration could be found in [demo](./backend-demo/fbConfig.js).
 
 ``` JavaScript
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -28,6 +45,8 @@ Author: Chang Xu
 
 ## Data Format
 
+**Update**: The type of `timestamp` property shown in the following screenshots has been changed to `number`.
+
 ### post
 
 Type: `TEXT`
@@ -39,18 +58,6 @@ Type: `LINK`
 ### comment
 
 ![](imgs/comment1.png)
-
-## Some design ideas
-
-1. It may be a good idea to use `react-uuid` to generate unique id for both `users` and `posts` to interact with the database.
-2. The reason why `users` and `posts` both contain the property `timestamp` is because we need it to display components in time order. Also, it's easy to get the actual date and time from the timestamp, for example:
-   ```Javascript
-   >> a = new Date().getTime()
-   1618696645490
-   >> b = new Date(a)
-   >> b.toLocaleString()
-   "4/17/2021, 2:57:25 PM"
-   ```
 
 ## RESTful API
 
