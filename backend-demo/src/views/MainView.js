@@ -28,8 +28,8 @@ function MainView(props) {
   return (
     <div className="container-fluid d-flex flex-column align-items-center">
 
-      {
-        Object.entries(posts).map(([postID, post], index) => {
+      { // time order: from oldest to newest
+        Object.entries(posts).sort((a, b) => (a[1].timestamp - b[1].timestamp)).map(([postID, post], index) => {
           console.log(postID, post);
           return <Card key={postID} postID={postID} post={post}/>
         })
