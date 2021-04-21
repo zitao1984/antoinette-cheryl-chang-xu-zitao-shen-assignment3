@@ -1,8 +1,16 @@
-# Backend Documentation
+# CS5610-Project3: Backend Documentation
 
 Author: Chang Xu
 
-## Some design ideas
+## Checklist
+
+- [x] Interacting with Firebase
+- [x] Design RESTful APIs
+- [x] Testing for API and documentation
+- [x] Create a backend demo
+- [ ] API for user sign up, log in and log out
+
+## Getting Started
 
 1. It may be a good idea to use `react-uuid` to generate unique id for both `users` and `posts` to interact with the database.
 2. The reason why `users` and `posts` both contain the property `timestamp` is because we need it to display components in time order. Also, it's easy to get the actual date and time from the timestamp, for example:
@@ -15,11 +23,11 @@ Author: Chang Xu
    ```
   **Note**: The type of `timestamp` is **number**, not string.
 
-3. A demo showing how to use `Axios` with `redux-think` to send HTTP request asynchronously and update the frontend state is provided. It could be run locally, or visit [here](https://cs5610-pj3-backend-demo.herokuapp.com/) to see.
+3. A demo showing how to use `Axios` with `redux-thunk` to send HTTP request asynchronously and update the frontend state is provided. It could be run locally, or visit [here](https://cs5610-pj3-backend-demo.herokuapp.com/) to see.
 
 ## Firebase Configuration
 
-A sample configuration could be found in [demo](./backend-demo/fbConfig.js).
+A sample configuration could be found in [fbConfig.js](./backend-demo/fbConfig.js).
 
 ``` JavaScript
 <!-- The core Firebase JS SDK is always required and must be listed first -->
