@@ -11,6 +11,9 @@ const SECRET = "SOME RANDOM SECRET";
 /**
  * Tested
  * 
+ * 1. First check if the username already registered, if yes, 401
+ * 2. Add user information to Firebase
+ * 
  * req.body.username
  * req.body.password
  */
@@ -21,19 +24,32 @@ router.post("/register", (req, res) => {
   const username = req.body.username;
   const password = bcrypt.hashSync(req.body.password, 10);
 
-  db.collection("users").add({
-    username: username,
-    password: password,
-  })
-  .then(docRef => {
-    console.log("Register Succeed!", docRef.id);
-    res.status(200).send(docRef.id);
+  const colRef = db.collection("users");
+  colRef.where("username", "==", username).get()
+  .then(querySnapshot => {
+    if(!querySnapshot.empty){
+      res.status(401).send(`Username ${username} has registered!`)
+    }
+    else {
+      colRef.add({
+        username: username,
+        password: password,
+      })
+      .then(docRef => {
+        console.log("Register Succeed!", docRef.id);
+        res.status(200).send(docRef.id);
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).send("Unable to add user to Firebase");
+      })
+    }
   })
   .catch(error => {
     console.log(error);
-    res.status(500).send("Unable to add user to Firebase");
+    res.status(500).send("Unable to query username")
   })
-  
+
 });
 
 /**
