@@ -1,3 +1,9 @@
+/**
+ * @author Chang Xu
+ * @email xu.chang1@northeastern.edu
+ * @create date 2021-04-22 23:38:11
+ * @modify date 2021-04-22 23:38:15
+ */
 const Axios = require('axios');
 
 const REGISTER = "http://localhost:8000/api/users/register";

@@ -1,3 +1,9 @@
+/**
+ * @author Chang Xu
+ * @email xu.chang1@northeastern.edu
+ * @create date 2021-04-22 23:32:25
+ * @modify date 2021-04-23 00:04:04
+ */
 const express = require('express');
 const router = express.Router();
 const { v4: uuid } = require('uuid');
@@ -27,6 +33,12 @@ router.post("/register", (req, res) => {
   console.log("------ User wants to register ------");
   console.log(req.body);
 
+  // check null
+  if(req.body.username == null || req.body.password == null){
+    res.status(404).send({signedUp: false, message: "Either username or password is null"});
+    return; // early termination
+  }
+
   const username = req.body.username;
   const password = bcrypt.hashSync(req.body.password, 10);
 
@@ -43,7 +55,7 @@ router.post("/register", (req, res) => {
       })
       .then(docRef => {
         console.log("Register Succeed!", docRef.id);
-        res.status(200).send({signedUp: true});
+        res.status(200).send({signedUp: true, username: username});
       })
       .catch(error => {
         console.log(error);
@@ -75,10 +87,16 @@ router.post("/login", cookie_middleware, (req, res) => {
 
   if(req.cookieUsername != null){ //don't use !==
     console.log(`${req.cookieUsername} has valid cookie`);
-    res.status(200).send({loggedIn: true, message: `${req.cookieUsername} logged in with cookie!`});
+    res.status(200).send({loggedIn: true, username: req.cookieUsername, message: `${req.cookieUsername} logged in with cookie!`});
     return; // early termination
   }
   
+  // check null
+  if(req.body.username == null || req.body.password == null){
+    res.status(404).send({loggedIn: false, message: "Either username or password is null"});
+    return; // early termination
+  }
+
   const username = req.body.username;
   console.log(`${username} does not have valid cookie`);
   db.collection("users").where("username", "==", username).get()
@@ -93,7 +111,7 @@ router.post("/login", cookie_middleware, (req, res) => {
         const token = jwt.sign(username, SECRET); // 5 minutes
         res.cookie("webdevtoken", token, {maxAge: MIN_5})
           .status(200)
-          .send({loggedIn: true});
+          .send({loggedIn: true, username: username});
       }
       else {
         res.status(401).send({loggedIn: false, message: "Incorrect password"});
@@ -120,28 +138,29 @@ router.post("/logout", cookie_middleware, (req, res) => {
   console.log("------ User wants to logout ------");
   console.log(req.body);
 
+  // check null
+  if(req.body.username == null){
+    res.status(404).send({loggedOut: false, message: "Username is null"});
+    return; // early termination
+  }
+
   const username = req.body.username;
   if(req.cookieUsername != null) {
     if(req.cookieUsername === username){ //has valid cookie
       console.log(`Server is going to clear ${username}'s cookie`)
       res.clearCookie("webdevtoken")
         .status(200)
-        .send({loggedOut: true});
+        .send({loggedOut: true, username: username});
     }
     else {
       console.log(`Loggout: req username does not match cookie username.`)
-      res.status(401).send({loggedOut: false});
+      res.status(404).send({loggedOut: false, message: "Req username does not match cookie username"});
     }
   }
   else {
-    res.status(200).send({loggedOut: true});
+    res.status(200).send({loggedOut: true, username: username});
   }
 
 });
-
-
-router.get("/", (req, res) => {
-  res.status(404).send("Invalid API call");
-})
 
 module.exports = router;
