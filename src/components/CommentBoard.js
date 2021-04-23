@@ -7,7 +7,7 @@ import Comment from "./Comment";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faReply,faEnvelopeOpen} from "@fortawesome/free-solid-svg-icons";
 import {LOGIN_STATE} from "../redux/stateConstants";
-import Card from "./Card";
+
 
 /**
  *
@@ -32,6 +32,7 @@ const CommentBoard = props=>{
 
 
     const time = new Date(props.post.timestamp)
+    console.log(props.postID)
 
 
 
@@ -47,7 +48,7 @@ const CommentBoard = props=>{
 
             <div>
             <h2 className="display-6 font-weight-bold text-dark " >Replay <FontAwesomeIcon icon={faReply}/> </h2>
-                <CommentCreator postId={props.id} commentId={"0"} message={""} />
+                <CommentCreator postID={props.postID} commentID={"0"} message={""} />
             </div>
             <div>
 

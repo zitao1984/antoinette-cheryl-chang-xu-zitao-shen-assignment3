@@ -79,7 +79,7 @@ export const ACTIONS = {
   },
 
 
-  // TODO:issue with rerendering
+
   modifyPost:(postID,post)=>{
 
     return dispatch=>{

@@ -9,3 +9,11 @@ export const NOTE_TYPE = {
     TEXT: "text",
     LINK: "link"
 }
+
+export const emptyPost =
+    {
+        type: NOTE_TYPE.TEXT,
+        text: "",
+        url: "",
+        title: "",
+    }

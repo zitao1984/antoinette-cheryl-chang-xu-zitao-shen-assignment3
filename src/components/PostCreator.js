@@ -1,37 +1,81 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-
 import {NOTE_TYPE,LOGIN_STATE} from "../redux/stateConstants";
 import {ACTIONS} from "../redux/actions";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
 
+/**
+ *
+ * @param props postID(0 for new post) title,message,url,type(default be text),onHide
+ * @returns {JSX.Element}
+ * @constructor
+ */
 
-
-const PostCreator = ()=>{
+const PostCreator = props =>{
     // const loginState = useSelector(state => state.login.loginState);
     const loginState = LOGIN_STATE.LOGGED_IN
     // const user =useSelector(state=>state.user);
     const user={
         name:"zitao",
-        id:"123"
-
     }
     const dispatch =useDispatch()
 
 
-    const [title, setTitle] = useState({
-        title:"",
-        isValid: undefined});
-    const [message, setMessage] = useState({
-        message:"",
-        isValid:undefined});
-    const [url, setUrl] = useState({
-        url: "",
-        isValid: undefined
+    const decideTitle = ID=>{
+        if(ID==="0"){
+            return {
+                title:props.post.title,
+                isValid: undefined}
+        }else{
+            return {
+                title:props.post.title,
+                isValid: true}
+        }
+    }
+
+    const decideText = ID=>{
+        if(ID==="0"){
+            return {
+                text:props.post.text,
+                isValid: undefined}
+        }else{
+            return {
+                text:props.post.text,
+                isValid: true}
+        }
+    }
+
+    const decideUrl= ID=>{
+        if(ID==="0"){
+            return {
+                url:props.post.url,
+                isValid: undefined}
+        }else{
+            return {
+                url:props.post.url,
+                isValid: true}
+        }
+    }
+
+    const [title, setTitle] = useState(()=> {
+        const initialState = decideTitle(props.postID);
+        return initialState;
     });
 
-    const [type, setType] = useState(NOTE_TYPE.TEXT);
+    const [text, setText] = useState(()=> {
+        const initialState = decideText(props.postID);
+        return initialState;
+    });
+
+    const [url, setUrl] = useState(()=> {
+        const initialState = decideUrl(props.postID);
+        return initialState;
+    });
+
+    const [type, setType] = useState(props.post.type);
+
+
 
     const onTitleInputChange = event => {
         setTitle({
@@ -41,8 +85,8 @@ const PostCreator = ()=>{
     }
 
     const onMessageInputChange = event => {
-        setMessage({
-            message: event.target.value,
+        setText({
+            text: event.target.value,
             isValid:event.target.value.length > 0
         })
     }
@@ -59,7 +103,9 @@ const PostCreator = ()=>{
     }
 
     const textNoteChecking =()=>{
-        return type === NOTE_TYPE.TEXT && message.isValid===true && title.isValid === true;}
+        return type === NOTE_TYPE.TEXT && text.isValid===true && title.isValid === true;}
+
+
 
 
     let canSubmit = (linkNoteChecking()||textNoteChecking()) && (loginState==="logged in")
@@ -67,24 +113,29 @@ const PostCreator = ()=>{
     const onSubmit = () => {
         let newPost ={
             type: type,
-            text: message.message,
+            text: text.text,
             url: url.url,
             title: title.title,
             timestamp: new Date().getTime(),
-            userID: user.id,
+            // userID: user.id,
             username: user.name,
         };
-        dispatch(ACTIONS.addPost(newPost));
+        if (props.postID==="0"){
+            console.log(newPost)
+            dispatch(ACTIONS.addPost(newPost));
+        }else{
+            dispatch(ACTIONS.modifyPost(props.postID,newPost))
+            props.onHide(false)
+        }
         clearForm();
-
     }
 
     const clearForm = () => {
         setTitle({
             title:"",
             isValid: undefined});
-        setMessage({
-            message:"",
+        setText({
+            text:"",
             isValid: undefined});
         setType(NOTE_TYPE.TEXT);
         setUrl({
@@ -96,7 +147,11 @@ const PostCreator = ()=>{
 
     return (
         <div>
-            <h2 className={"display-5 font-weight-bold text-dark"}>Post a new thread <FontAwesomeIcon icon={faEnvelope}/></h2>
+            {
+                props.postID==="0"?
+                    <h2 className={"display-5 font-weight-bold text-dark"}>Make a new post<FontAwesomeIcon icon={faEnvelope}/></h2>
+                    :""
+            }
             <div className="row my-2 ">
                 <legend className="col-form-label col-sm-3 pt-0">Note type:</legend>
                 <div className="col-auto">
@@ -133,9 +188,9 @@ const PostCreator = ()=>{
                             <label className="col-sm-3 col-form-label text-center fst-italic h5" htmlFor="message">Message:</label>
                             <div className="col-sm-9">
                         <textarea id="message" className="form-control"
-                                  value={message.message}
+                                  value={text.text}
                                   onChange={e => onMessageInputChange(e)}/>
-                                <div className="invalid-feedback" style={message.isValid === false ? {display:"block"} : {display: "none"}}>Message cannot be empty</div>
+                                <div className="invalid-feedback" style={text.isValid === false ? {display:"block"} : {display: "none"}}>Message cannot be empty</div>
                             </div>
                         </div>
                     ):
@@ -157,7 +212,6 @@ const PostCreator = ()=>{
                     <button className="btn btn-primary btn-lg" type="submit" disabled={!canSubmit} onClick={()=>onSubmit()}>submit </button>
                 </div>
             </div>
-
         </div>
 
     )
@@ -165,4 +219,4 @@ const PostCreator = ()=>{
 
 }
 
-export default  PostCreator;
+export default PostCreator;

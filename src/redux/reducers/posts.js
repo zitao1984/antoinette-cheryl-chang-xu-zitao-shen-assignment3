@@ -20,7 +20,7 @@ export const postReducer = (state = INITIAL_STATE, action) => {
 
         case ACTION_TYPES.MODIFY_POST:
             return {
-                posts:[...action.payload.posts],
+                posts:action.payload.posts,
             }
 
         case ACTION_TYPES.POST_POST:

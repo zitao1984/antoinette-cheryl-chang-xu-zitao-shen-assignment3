@@ -1,14 +1,11 @@
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {ACTIONS} from "../redux/actions";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faReply} from "@fortawesome/free-solid-svg-icons";
-import uuid from "react-uuid";
 import {LOGIN_STATE} from "../redux/stateConstants";
 
 /**
  *
- * @param props: postID,commentID(0 for new,o.w. for the modify),message
+ * @param props: postID,commentID(0 for new,o.w. for the modify),message,onHide
  * @returns {JSX.Element}
  * @constructor
  */
@@ -19,7 +16,7 @@ const CommentCreator = props =>{
     const loginState = LOGIN_STATE.LOGGED_IN
     const user={
         name:"zitao",
-        id:"Sam005"
+
     }
 
     const dispatch =useDispatch()
@@ -32,27 +29,33 @@ const CommentCreator = props =>{
 
     const onMessageInputChange = event => {
         setMessage({
-            message: event.target.value,
+            text: event.target.value,
             isValid:event.target.value.length > 0
         })
     }
 
-    let canSubmit = message.isValid && (loginState==="logged in")
+    const canSubmit = message.isValid && (loginState==="logged in")
 
     const onSubmit = () => {
         let newComment = {
-            userID: user.id,
+            // userID: user.id,
             username: user.name,
             text: message.message,
             timestamp: new Date().getTime()
         }
-        dispatch(ACTIONS.addComments(props.postID,newComment));
+        console.log(props.postID)
+        if (props.commentID==="0") {
+            dispatch(ACTIONS.addComments(props.postID, newComment));
+        }else{
+            dispatch(ACTIONS.modifyComment(props.postID, props.commentID,newComment));
+            props.onHide(false);
+        }
         clearForm();
     }
 
     const clearForm = () => {
         setMessage({
-            message:"",
+            text:"",
             isValid: undefined});
     }
 

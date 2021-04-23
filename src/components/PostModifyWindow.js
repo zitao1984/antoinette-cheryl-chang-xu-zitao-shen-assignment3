@@ -1,13 +1,14 @@
 import Modal from 'react-bootstrap/Modal'
-import CommentCreator from "./CommentCreator";
+import PostCreator from "./PostCreator";
+import {NOTE_TYPE} from "../redux/stateConstants";
 
 /**
  *
- * @param props:postID,commentID,OnHide,message
+ * @param props:postID,post,OnHide,show
  * @returns {JSX.Element}
  * @constructor
  */
-const CommentModifyWindow= props=>{
+const PostModifyWindow= props=>{
     return (
         <Modal
             {...props}
@@ -17,14 +18,14 @@ const CommentModifyWindow= props=>{
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Modify your comment
+                    Modify your post
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <CommentCreator postID={props.postID} commentID={props.commentID} message={props.message} onHide={props.onHide}/>
+                <PostCreator postID={props.postID}  post={props.post} onHide={props.onHide}/>
             </Modal.Body>
         </Modal>
     );
 
 }
-export default CommentModifyWindow;
+export default PostModifyWindow;

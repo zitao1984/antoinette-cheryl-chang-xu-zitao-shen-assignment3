@@ -83,7 +83,7 @@ function MainView(props) {
         </div>
 
         <div className="post-generator my-3 post-card">
-            <button className="btn btn-primary" type="button" onClick={() => dispatch(ACTIONS.deleteComment("CPoPrlvrO7nkNt3dQh8Y","WjKIkm2iVdYGkQm4O4cC"))}>
+            <button className="btn btn-primary" type="button" onClick={() => dispatch(ACTIONS.deleteComment("CPoPrlvrO7nkNt3dQh8Y","AZ04WHQRL6ebipbTDhMb"))}>
                 delet comment
             </button>
         </div>
