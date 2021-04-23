@@ -14,5 +14,6 @@ input URL to see different component
 http://localhost:3000/test
 http://localhost:3000/postcreate
 http://localhost:3000/comment
+http://localhost:3000/post
 
 ```
