@@ -2,7 +2,7 @@
  * @author Chang Xu
  * @email xu.chang1@northeastern.edu
  * @create date 2021-04-22 23:32:25
- * @modify date 2021-04-23 00:44:18
+ * @modify date 2021-04-23 10:27:07
  */
 const express = require('express');
 const router = express.Router();
@@ -22,8 +22,6 @@ const MIN_5 = 300000;
 const MIN_15 = 900000;
 
 /**
- * Tested
- * 
  * 1. First check if the username already registered, if yes, 401
  * 2. Add user information to Firebase
  * 
@@ -72,12 +70,11 @@ router.post("/register", (req, res) => {
 });
 
 /**
- * Tested
- * 
  * 1. Go though the middleware
  * 2. If valid cookie exists, simply responds 200, skip the following steps.
  * 3. Check if the username exists in Firebase, if not, 404
  * 4. Check if password matches, if not, 401
+ * 5. Send back the response with a newly-created cookie
  * 
  * req.body.username
  * req.body.password
@@ -127,8 +124,6 @@ router.post("/login", cookie_middleware, (req, res) => {
 });
 
 /**
- * Tested
- * 
  * 1. Go though the middleware
  * 2. If it has a valid cookie, clear the cookie.
  * 3. Send back response

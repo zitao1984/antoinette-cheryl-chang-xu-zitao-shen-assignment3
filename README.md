@@ -2,17 +2,20 @@
 
 Author: Chang Xu
 
-## Checklist
+## 1. Task List
 
-- [x] Interacting with Firebase
-- [x] Design RESTful APIs
-- [x] Testing for API and documentation
-- [x] Create a backend demo
-- [ ] API for user sign up, log in and log out
+- [x] Connecting with Firebase
+- [x] Designing RESTful APIs for user sign up, log in and log out, involving Cookie
+- [x] Password encryption at the server side
+- [x] Testing for API and writing up of documentation
+- [x] [Demo](https://cs5610-pj3-backend-demo.herokuapp.com/) illustrating how React and Redux interact with RESTful API
+- [x] [Video](https://drive.google.com/file/d/1KKWbCthZR8LlxM1H-SwYZ1mG1WtzQqJc/view?usp=sharing) showing how Cookie works when the page refreshes
 
-## Getting Started
+## 2. Getting Started
 
-1. It may be a good idea to use `react-uuid` to generate unique id for both `users` and `posts` to interact with the database.
+**Update**: Property `userID` is no more needed for posts and comments, since we prohibit the appearance of duplicate usernames in the database.
+
+1. Use `react-uuid` to generate unique id for `posts` to interact with the database.
 2. The reason why `users` and `posts` both contain the property `timestamp` is because we need it to display components in time order. Also, it's easy to get the actual date and time from the timestamp, for example:
    ```Javascript
    >> a = new Date().getTime()
@@ -23,9 +26,10 @@ Author: Chang Xu
    ```
   **Note**: The type of `timestamp` is **number**, not string.
 
-3. A demo showing how to use `Axios` with `redux-thunk` to send HTTP request asynchronously and update the frontend state is provided. It could be run locally, or visit [here](https://cs5610-pj3-backend-demo.herokuapp.com/) to see.
+3. Please familiarize yourself with the concepts of Cookie first. Here the Cookie lifetime is set to be 5 minutes. In the video, the lifetime is set to be 2 minutes.
+4. A demo showing how to use `Axios` with `redux-thunk` to send HTTP request asynchronously and update the frontend state is provided. Also it illustrates how Login logic works. The demo could be run locally, or visited [here](https://cs5610-pj3-backend-demo.herokuapp.com/).
 
-## Firebase Configuration
+## 3. Firebase Configuration
 
 A sample configuration could be found in [fbConfig.js](./backend-demo/fbConfig.js).
 
@@ -51,11 +55,11 @@ A sample configuration could be found in [fbConfig.js](./backend-demo/fbConfig.j
 </script>
 ```
 
-## Data Format
+## 4. Data Format
 
 **Update**: The type of `timestamp` property shown in the following screenshots has been changed to `number`.
 
-### post
+### 4.1. post
 
 Type: `TEXT`
 ![](imgs/post1.png)
@@ -63,15 +67,15 @@ Type: `TEXT`
 Type: `LINK`
 ![](imgs/post2.png)
 
-### comment
+### 4.2. comment
 
 ![](imgs/comment1.png)
 
-## RESTful API
+## 5. RESTful API
 
 Demo of every API. Please check the source code under `/routes` folder for detailed information.
 
-### **/api/posts**
+### 5.1. **/api/posts**
 
 GET: localhost:8000/api/posts
 
@@ -127,7 +131,7 @@ DELETE: localhost:8000/api/posts?postID=QLySgjJRnpdXnh9Ubdx1
   No response, only status code 200 or 404
 ```
 
-### **/api/comments**
+### 5.2. **/api/comments**
 
 GET: localhost:8000/api/comments?postID=CPoPrlvrO7nkNt3dQh8Y
 
@@ -166,4 +170,80 @@ DELETE: localhost:8000/api/comments?postID=CPoPrlvrO7nkNt3dQh8Y&commentID=3TF0DE
 
 ```
   No response, only status code 200 or 404
+```
+
+### 5.3. **/api/users**
+
+#### 5.3.1. **Register**
+
+To sign up, please format a request as shown below:
+
+> POST: localhost:8000/api/users/register
+
+The body of the request should be like:
+
+```JSON
+{username: <string>, password: <string>}
+```
+
+Response Body:
++ `2xx`: 
+```JSON
+{signedUp: true, username: <string>}
+```
++ `4xx`:
+```JSON
+{signedUp: false, message: <string>}
+```
++ `5xx`:
+```JSON
+{signedUp: false, message: <string>}
+```
+
+#### 5.3.2. **Login**
+
+To log in, please format a request as shown below:
+
+> POST: localhost:8000/api/users/login
+
+The body of the request should be like:
+
+```JSON
+{username: <string>, password: <string>}
+```
+
+Response Body:
++ `2xx`: 
+```JSON
+{loggedIn: true, username: <string>}
+```
++ `4xx`:
+```JSON
+{loggedIn: false, message: <string>}
+```
++ `5xx`:
+```JSON
+{loggedIn: false, message: <string>}
+```
+
+#### 5.3.3. **Logout**
+
+To log out, please format a request as shown below:
+
+> POST: localhost:8000/api/users/login
+
+The body of the request should be like:
+
+```JSON
+{username: <string>}
+```
+
+Response Body:
++ `2xx`: 
+```JSON
+{loggedOut: true, username: <string>}
+```
++ `4xx`:
+```JSON
+{loggedOut: false, message: <string>}
 ```
