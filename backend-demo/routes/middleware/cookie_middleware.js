@@ -10,8 +10,8 @@ const SECRET = "SOME RANDOM SECRET";
  */
 module.exports = function(req, res, next) {
   console.log("######Debug Info For Cookie_Middleware######")
-  // First check if there is a cookie
   console.log(req.cookies); /* {webdevtoken: 'bluhbluh'} */
+  // First check if there is a cookie
   if(req.cookies){
     const wdt = req.cookies.webdevtoken;
     if (!wdt) {

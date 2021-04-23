@@ -9,7 +9,8 @@ const db = firebase.firestore();
 
 const SECRET = "SOME RANDOM SECRET";
 
-// The cookie only lasts for 5 minutes
+// Cookie's lifetime
+const MIN_2 = 120000;
 const MIN_5 = 300000;
 const MIN_15 = 900000;
 
@@ -61,9 +62,9 @@ router.post("/register", (req, res) => {
  * Tested
  * 
  * 1. Go though the middleware
- * 2. If valid cookie exists and username matches, simply responds 200, skip the following steps.
+ * 2. If valid cookie exists, simply responds 200, skip the following steps.
  * 3. Check if the username exists in Firebase, if not, 404
- * 4. Check password, if not, 401
+ * 4. Check if password matches, if not, 401
  * 
  * req.body.username
  * req.body.password
@@ -72,12 +73,13 @@ router.post("/login", cookie_middleware, (req, res) => {
   console.log("------ User wants to login ------");
   console.log(req.body);
 
-  const username = req.body.username;
-  if(req.cookieUsername === username){
-    console.log(`${username} has valid cookie`);
-    res.status(200).send({loggedIn: true, message: `${username} have successfully logged in!`});
+  if(req.cookieUsername != null){ //don't use !==
+    console.log(`${req.cookieUsername} has valid cookie`);
+    res.status(200).send({loggedIn: true, message: `${req.cookieUsername} logged in with cookie!`});
     return; // early termination
   }
+  
+  const username = req.body.username;
   console.log(`${username} does not have valid cookie`);
   db.collection("users").where("username", "==", username).get()
   .then(querySnapshot => {
@@ -119,16 +121,22 @@ router.post("/logout", cookie_middleware, (req, res) => {
   console.log(req.body);
 
   const username = req.body.username;
-  if(req.cookieUsername === username){ //has valid cookie
-    console.log(`Server is going to clear ${username}'s cookie`)
-    res.clearCookie("webdevtoken")
-      .status(200)
-      .send({loggedOut: true});
+  if(req.cookieUsername != null) {
+    if(req.cookieUsername === username){ //has valid cookie
+      console.log(`Server is going to clear ${username}'s cookie`)
+      res.clearCookie("webdevtoken")
+        .status(200)
+        .send({loggedOut: true});
+    }
+    else {
+      console.log(`Loggout: req username does not match cookie username.`)
+      res.status(401).send({loggedOut: false});
+    }
   }
   else {
     res.status(200).send({loggedOut: true});
   }
-  
+
 });
 
 
