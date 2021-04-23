@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 const { v4: uuid } = require('uuid');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const cookie_middleware = require('./middleware/cookie_middleware');
 const firebase = require('../fbConfig');
 const db = firebase.firestore();
 
 const SECRET = "SOME RANDOM SECRET";
+const MIN_5 = 300000;
+const MIN_15 = 900000;
 
 /**
  * Tested
@@ -55,17 +58,24 @@ router.post("/register", (req, res) => {
 /**
  * Tested
  * 
+ * 1. Go though the middleware, if valid cookie exists, simply responds 200
  * 1. First check if the username exists in Firebase, if not, 404
  * 2. Check password, if not, 401
  * 
  * req.body.username
  * req.body.password
  */
-router.post("/login", (req, res) => {
-  console.log("User wants to login");
+router.post("/login", cookie_middleware, (req, res) => {
+  console.log("------ User wants to login ------");
   console.log(req.body);
 
   const username = req.body.username;
+  if(req.cookieUsername === username){
+    console.log(`${username} has valid cookie`);
+    res.status(200).send(`${username} have successfully logged in!`);
+    return; // early termination
+  }
+  console.log(`${username} does not have valid cookie`);
   db.collection("users").where("username", "==", username).get()
   .then(querySnapshot => {
     if(querySnapshot.empty){
@@ -74,7 +84,11 @@ router.post("/login", (req, res) => {
     else {
       const docData = querySnapshot.docs[0].data();
       if(bcrypt.compareSync(req.body.password, docData.password)){ // pass validation
-        res.status(200).send(`${username} have successfully logged in!`);
+        // Set a cookie here
+        const token = jwt.sign(username, SECRET); // 5 minutes
+        res.cookie("webdevtoken", token, {maxAge: MIN_5})
+          .status(200)
+          .send(`${username} have successfully logged in!`);
       }
       else {
         res.status(401).send("Incorrect password");
