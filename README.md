@@ -183,21 +183,33 @@ To sign up, please format a request as shown below:
 The body of the request should be like:
 
 ```JSON
-{username: <string>, password: <string>}
+{
+  username: <string>, 
+  password: <string>
+}
 ```
 
 Response Body:
 + `2xx`: 
 ```JSON
-{signedUp: true, username: <string>}
+{
+  signedUp: true, 
+  username: <string>
+}
 ```
 + `4xx`:
 ```JSON
-{signedUp: false, message: <string>}
+{
+  signedUp: false, 
+  message: <string>
+}
 ```
 + `5xx`:
 ```JSON
-{signedUp: false, message: <string>}
+{
+  signedUp: false, 
+  message: <string>
+}
 ```
 
 #### 5.3.2. **Login**
@@ -209,41 +221,61 @@ To log in, please format a request as shown below:
 The body of the request should be like:
 
 ```JSON
-{username: <string>, password: <string>}
+{
+  username: <string>, 
+  password: <string>
+}
 ```
 
 Response Body:
 + `2xx`: 
 ```JSON
-{loggedIn: true, username: <string>}
+{
+  loggedIn: true, 
+  username: <string>
+}
 ```
 + `4xx`:
 ```JSON
-{loggedIn: false, message: <string>}
+{
+  loggedIn: false, 
+  message: <string>
+}
 ```
 + `5xx`:
 ```JSON
-{loggedIn: false, message: <string>}
+{
+  loggedIn: false, 
+  message: <string>
+}
 ```
 
 #### 5.3.3. **Logout**
 
 To log out, please format a request as shown below:
 
-> POST: localhost:8000/api/users/login
+> POST: localhost:8000/api/users/logout
 
 The body of the request should be like:
 
 ```JSON
-{username: <string>}
+{
+  username: <string>
+}
 ```
 
 Response Body:
 + `2xx`: 
 ```JSON
-{loggedOut: true, username: <string>}
+{
+  loggedOut: true, 
+  username: <string>
+}
 ```
 + `4xx`:
 ```JSON
-{loggedOut: false, message: <string>}
+{
+  loggedOut: false, 
+  message: <string>
+}
 ```
