@@ -8,6 +8,8 @@ const firebase = require('../fbConfig');
 const db = firebase.firestore();
 
 const SECRET = "SOME RANDOM SECRET";
+
+// The cookie only lasts for 5 minutes
 const MIN_5 = 300000;
 const MIN_15 = 900000;
 
@@ -21,7 +23,7 @@ const MIN_15 = 900000;
  * req.body.password
  */
 router.post("/register", (req, res) => {
-  console.log("User wants to register");
+  console.log("------ User wants to register ------");
   console.log(req.body);
 
   const username = req.body.username;
@@ -31,7 +33,7 @@ router.post("/register", (req, res) => {
   colRef.where("username", "==", username).get()
   .then(querySnapshot => {
     if(!querySnapshot.empty){
-      res.status(401).send(`Username ${username} has registered!`)
+      res.status(401).send({signedUp: false, message: `Username ${username} has already registered!`})
     }
     else {
       colRef.add({
@@ -40,17 +42,17 @@ router.post("/register", (req, res) => {
       })
       .then(docRef => {
         console.log("Register Succeed!", docRef.id);
-        res.status(200).send(docRef.id);
+        res.status(200).send({signedUp: true});
       })
       .catch(error => {
         console.log(error);
-        res.status(500).send("Unable to add user to Firebase");
+        res.status(500).send({signedUp: false, message: "Unable to add user to Firebase"});
       })
     }
   })
   .catch(error => {
     console.log(error);
-    res.status(500).send("Unable to query username")
+    res.status(500).send({signedUp: false, message: "Server failed to connect to Firebase when handling sign-in logic"});
   })
 
 });
@@ -58,9 +60,10 @@ router.post("/register", (req, res) => {
 /**
  * Tested
  * 
- * 1. Go though the middleware, if valid cookie exists, simply responds 200
- * 1. First check if the username exists in Firebase, if not, 404
- * 2. Check password, if not, 401
+ * 1. Go though the middleware
+ * 2. If valid cookie exists and username matches, simply responds 200, skip the following steps.
+ * 3. Check if the username exists in Firebase, if not, 404
+ * 4. Check password, if not, 401
  * 
  * req.body.username
  * req.body.password
@@ -72,14 +75,14 @@ router.post("/login", cookie_middleware, (req, res) => {
   const username = req.body.username;
   if(req.cookieUsername === username){
     console.log(`${username} has valid cookie`);
-    res.status(200).send(`${username} have successfully logged in!`);
+    res.status(200).send({loggedIn: true, message: `${username} have successfully logged in!`});
     return; // early termination
   }
   console.log(`${username} does not have valid cookie`);
   db.collection("users").where("username", "==", username).get()
   .then(querySnapshot => {
     if(querySnapshot.empty){
-      res.status(404).send(`User ${username} not found.`)
+      res.status(404).send({loggedIn: false, message: `User ${username} not found.`})
     }
     else {
       const docData = querySnapshot.docs[0].data();
@@ -88,10 +91,10 @@ router.post("/login", cookie_middleware, (req, res) => {
         const token = jwt.sign(username, SECRET); // 5 minutes
         res.cookie("webdevtoken", token, {maxAge: MIN_5})
           .status(200)
-          .send(`${username} have successfully logged in!`);
+          .send({loggedIn: true});
       }
       else {
-        res.status(401).send("Incorrect password");
+        res.status(401).send({loggedIn: false, message: "Incorrect password"});
       }
     }
   })
@@ -102,32 +105,32 @@ router.post("/login", cookie_middleware, (req, res) => {
 
 });
 
-router.post("/logout", (req, res) => {
-  console.log("User wants to logout");
-});
-
-
-//testing
-router.post("/test", (req, res) => {
-  console.log("User wants to test");
+/**
+ * Tested
+ * 
+ * 1. Go though the middleware
+ * 2. If it has a valid cookie, clear the cookie.
+ * 3. Send back response
+ * 
+ * req.body.username
+ */
+router.post("/logout", cookie_middleware, (req, res) => {
+  console.log("------ User wants to logout ------");
   console.log(req.body);
-  db.collection('users').where("username", "==", req.body.username).get()
-  .then(querySnapshot => {
-    console.log(typeof(querySnapshot)) // object
-    // console.log(querySnapshot)
-    console.log(querySnapshot.empty)
-    console.log(querySnapshot.size)
-    // console.log(querySnapshot.docs)
-    if(!querySnapshot.empty){
-      const docData = querySnapshot.docs[0].data();
-      console.log(docData);
-      res.status(200).send(docData);
-    }
-    else
-      res.status(200).send("nothing");
-  })
-  .catch(error => console.log(error))
+
+  const username = req.body.username;
+  if(req.cookieUsername === username){ //has valid cookie
+    console.log(`Server is going to clear ${username}'s cookie`)
+    res.clearCookie("webdevtoken")
+      .status(200)
+      .send({loggedOut: true});
+  }
+  else {
+    res.status(200).send({loggedOut: true});
+  }
+  
 });
+
 
 router.get("/", (req, res) => {
   res.status(404).send("Invalid API call");

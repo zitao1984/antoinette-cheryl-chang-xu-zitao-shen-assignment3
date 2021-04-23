@@ -2,6 +2,12 @@
 const jwt = require('jsonwebtoken')
 
 const SECRET = "SOME RANDOM SECRET";
+
+/**
+ * If there is not valid cookie (e.g. cookie expired), then do nothing
+ * If cookie failed to be verified (e.g. modified by malicious software), then res 499
+ * If cookie got verified, then append cookieUsername property to req, with value of the decoded information
+ */
 module.exports = function(req, res, next) {
   console.log("######Debug Info For Cookie_Middleware######")
   // First check if there is a cookie
