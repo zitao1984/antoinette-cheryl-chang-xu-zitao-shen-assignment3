@@ -1,5 +1,6 @@
 .vscode
 .DS_Store
+*.mov
 
 # Chang's Heroku deployment
 /heroku-deployment

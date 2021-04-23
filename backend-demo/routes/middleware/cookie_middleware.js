@@ -2,6 +2,7 @@
 const jwt = require('jsonwebtoken')
 
 const SECRET = "SOME RANDOM SECRET";
+const TOKEN_NAME = "CS5610-ACZ";
 
 /**
  * If there is not valid cookie (e.g. cookie expired), then do nothing
@@ -10,10 +11,10 @@ const SECRET = "SOME RANDOM SECRET";
  */
 module.exports = function(req, res, next) {
   console.log("######Debug Info For Cookie_Middleware######")
-  console.log(req.cookies); /* {webdevtoken: 'bluhbluh'} */
+  console.log(req.cookies[TOKEN_NAME]); /* {TOKEN_NAME: 'bluhbluh'} */
   // First check if there is a cookie
   if(req.cookies){
-    const wdt = req.cookies.webdevtoken;
+    const wdt = req.cookies[TOKEN_NAME];
     if (!wdt) {
       // return res.status(401).send("No valid web dev token given")
       console.log("No valid web dev token given");

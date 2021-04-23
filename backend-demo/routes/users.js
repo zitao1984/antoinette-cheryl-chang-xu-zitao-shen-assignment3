@@ -2,7 +2,7 @@
  * @author Chang Xu
  * @email xu.chang1@northeastern.edu
  * @create date 2021-04-22 23:32:25
- * @modify date 2021-04-23 00:04:04
+ * @modify date 2021-04-23 00:44:18
  */
 const express = require('express');
 const router = express.Router();
@@ -14,6 +14,7 @@ const firebase = require('../fbConfig');
 const db = firebase.firestore();
 
 const SECRET = "SOME RANDOM SECRET";
+const TOKEN_NAME = "CS5610-ACZ";
 
 // Cookie's lifetime
 const MIN_2 = 120000;
@@ -93,7 +94,7 @@ router.post("/login", cookie_middleware, (req, res) => {
   
   // check null
   if(req.body.username == null || req.body.password == null){
-    res.status(404).send({loggedIn: false, message: "Either username or password is null"});
+    res.status(404).send({loggedIn: false, message: "Either username or password should not be null"});
     return; // early termination
   }
 
@@ -108,8 +109,8 @@ router.post("/login", cookie_middleware, (req, res) => {
       const docData = querySnapshot.docs[0].data();
       if(bcrypt.compareSync(req.body.password, docData.password)){ // pass validation
         // Set a cookie here
-        const token = jwt.sign(username, SECRET); // 5 minutes
-        res.cookie("webdevtoken", token, {maxAge: MIN_5})
+        const token = jwt.sign(username, SECRET);
+        res.cookie(TOKEN_NAME, token, {maxAge: MIN_5})
           .status(200)
           .send({loggedIn: true, username: username});
       }
@@ -148,7 +149,7 @@ router.post("/logout", cookie_middleware, (req, res) => {
   if(req.cookieUsername != null) {
     if(req.cookieUsername === username){ //has valid cookie
       console.log(`Server is going to clear ${username}'s cookie`)
-      res.clearCookie("webdevtoken")
+      res.clearCookie(TOKEN_NAME)
         .status(200)
         .send({loggedOut: true, username: username});
     }
