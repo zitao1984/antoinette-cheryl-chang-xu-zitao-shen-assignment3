@@ -20,6 +20,7 @@ const App = () => {
     dispatch(ACTIONS.getPosts());
     dispatch(ACTIONS.initLogin())
 
+
   }, [dispatch])
 
   const newPost = () => {

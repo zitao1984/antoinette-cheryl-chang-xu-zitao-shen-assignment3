@@ -9,11 +9,16 @@ For web assignment3
 ```
 
 ###component test
+
 input URL to see different component
+
+test page is only test redux part and api
 ```
 http://localhost:3000/test
 http://localhost:3000/postcreate
 http://localhost:3000/comment
 http://localhost:3000/post
+http://localhost:3000/signup
+http://localhost:3000/login
 
 ```

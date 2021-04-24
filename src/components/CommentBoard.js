@@ -33,6 +33,9 @@ const CommentBoard = props=>{
     const time = new Date(props.post.timestamp)
     console.log(props.postID)
 
+    const state =useSelector(state=>state)
+    console.log(state)
+
 
 
     return (

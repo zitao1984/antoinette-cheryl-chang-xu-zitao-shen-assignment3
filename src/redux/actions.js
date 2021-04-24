@@ -60,7 +60,6 @@ export const ACTIONS = {
                     }
                 })
                 .catch(error => {
-                    console.log("I am here")
                     console.log(error.response.status);
                     console.log(error.response.data);
                     dispatch(ACTIONS.updateErrMsg(error.response.data.message));
@@ -85,20 +84,21 @@ export const ACTIONS = {
         }
     },
 
+
     register: (username,password)=>{
       return dispatch=>{
         Axios.post("/api/users/register", {username: username, password: password})
             .then(res => {
                 console.log(res)
                 if (res.data.signedUp) {
-                    // console.log(res.data.message);
-                    dispatch(ACTIONS.signUp(res.data.username));
+                    console.log(res.data.username);
+                    // dispatch(ACTIONS.signUp(res.data.username));
+                    dispatch(ACTIONS.regularLogin(username,password))
                 }
             })
             .catch(error => {
-                console.log(error)
-                // console.log(error.response.status);
-                // console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.data);
                 dispatch(ACTIONS.updateErrMsg(error.response.data.message));
             })
     }

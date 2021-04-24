@@ -52,26 +52,26 @@ const Post= props=>{
 
                 {
                     props.post.type===NOTE_TYPE.TEXT?
-                        //<button className="btn btn-primary" >See Text </button>
+                        <button className="btn btn-primary" >See Text </button>
                         // <PostText post={props.post}/>
-                        (<Router>
-                                <div>
-                                    <Link to={"/post/"+props.postID} target="_blank">see text</Link>
-                                <Switch>
-                                    <Route path={"/post/"+props.postID}>
-                                        <PostText post={props.post}/>
-                                    </Route>
-                                    <Route path={"/post/zitaoshen"}>
-                                       <div>hello</div>
-                                    </Route>
-                                </Switch>
-
-                                </div>
-
-                            </Router>
-
-
-                        )
+                        // (<Router>
+                        //         <div>
+                        //             <Link to={"/post/"+props.postID} target="_blank">see text</Link>
+                        //         <Switch>
+                        //             <Route path={"/post/"+props.postID}>
+                        //                 <PostText post={props.post}/>
+                        //             </Route>
+                        //             <Route path={"/post/zitaoshen"}>
+                        //                <div>hello</div>
+                        //             </Route>
+                        //         </Switch>
+                        //
+                        //         </div>
+                        //
+                        //     </Router>
+                        //
+                        //
+                        // )
                         :
                         (
                             <a href={"https://"+props.post.url}>

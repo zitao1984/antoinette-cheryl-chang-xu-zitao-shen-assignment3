@@ -14,6 +14,9 @@ const SignUp = () => {
     const errMsg = useSelector(state => state.login.errMsg);
     const loginState = useSelector(state => state.login.loginState);
 
+    const state = useSelector(state=>state)
+    console.log(state)
+
 
     const dispatch = useDispatch();
 
@@ -71,7 +74,7 @@ const SignUp = () => {
             <div className="row">
                 <div className="col">
                     <button className="btn btn-secondary float-end" onClick={handleLogin}>
-                        Log in <FontAwesomeIcon icon={faSignInAlt}/>
+                        Sign up <FontAwesomeIcon icon={faSignInAlt}/>
                     </button>
                 </div>
             </div>

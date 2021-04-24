@@ -11,6 +11,7 @@ let editingBegun = false;
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const user = useSelector(state=>state.user)
     const errMsg = useSelector(state => state.login.errMsg);
     const loginState = useSelector(state => state.login.loginState);
 
@@ -43,7 +44,7 @@ const Login = () => {
                 loginState === LOGIN_STATE.LOGGED_IN?
                     (
                         <div className="post-generator my-3 post-card">
-                            <button className="btn btn-primary" type="button" onClick={() => dispatch(ACTIONS.logOut("zitaowww"))}>
+                            <button className="btn btn-primary" type="button" onClick={() => dispatch(ACTIONS.logOut(user))}>
                                 log Out
                             </button>
                         </div>
