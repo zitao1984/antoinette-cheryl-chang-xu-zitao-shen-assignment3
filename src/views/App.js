@@ -1,16 +1,26 @@
 import { Provider, useDispatch } from "react-redux";
 import { ACTIONS } from "../redux/actions";
 import MainView from "./MainView";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import PostCreator from "../components/PostCreator";
 import CommentBoard from "../components/CommentBoard";
 import uuid from "react-uuid";
 import {emptyPost, NOTE_TYPE} from "../redux/stateConstants";
 import PostBoard from "../components/PostBoard";
+import PostText from "../components/PostText";
+import {useEffect} from "react";
+import Login from "../components/Login";
+import SignUp from "../components/signUp";
+
 const App = () => {
 
   const dispatch = useDispatch();
-  dispatch(ACTIONS.getPosts());
+
+  useEffect(() => {
+    dispatch(ACTIONS.getPosts());
+    dispatch(ACTIONS.initLogin())
+
+  }, [dispatch])
 
   const newPost = () => {
     return {
@@ -43,6 +53,21 @@ const App = () => {
       <Route path="/post">
         <PostBoard />
       </Route>
+      <Route path="/login">
+        <Login />
+      </Route>
+      <Route path="/signup">
+        <SignUp />
+      </Route>
+
+            {/*<Route path={"/post/:postId"}>*/}
+            {/*  <PostText post={testPost}/>*/}
+            {/*</Route>*/}
+            {/*<Route path={"/post/zitaoshen"}>*/}
+            {/*  <div>hello</div>*/}
+            {/*</Route>*/}
+
+
     </Switch>
   </Router>
   );

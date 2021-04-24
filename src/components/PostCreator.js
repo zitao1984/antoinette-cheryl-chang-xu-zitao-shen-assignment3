@@ -13,12 +13,12 @@ import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
  */
 
 const PostCreator = props =>{
-    // const loginState = useSelector(state => state.login.loginState);
-    const loginState = LOGIN_STATE.LOGGED_IN
-    // const user =useSelector(state=>state.user);
-    const user={
-        name:"zitao",
-    }
+    const loginState = useSelector(state => state.login.loginState);
+    // const loginState = LOGIN_STATE.LOGGED_IN
+    const user =useSelector(state=>state.user);
+    // const user={
+    //     name:"zitao",
+    // }
     const dispatch =useDispatch()
 
 
@@ -118,7 +118,7 @@ const PostCreator = props =>{
             title: title.title,
             timestamp: new Date().getTime(),
             // userID: user.id,
-            username: user.name,
+            username: user,
         };
         if (props.postID==="0"){
             console.log(newPost)

@@ -10,26 +10,40 @@ import {LOGIN_STATE} from "../redux/stateConstants";
  * @constructor
  */
 const CommentCreator = props =>{
-    //const loginState = useSelector(state => state.login.loginState);
-    // const thread= useSelector(state => state.threads.thread);
-    // const user =useSelector(state=>state.user);
-    const loginState = LOGIN_STATE.LOGGED_IN
-    const user={
-        name:"zitao",
+    const loginState = useSelector(state => state.login.loginState);
 
-    }
+    const user =useSelector(state=>state.user);
+    // const loginState = LOGIN_STATE.LOGGED_IN
+    // const user={
+    //     name:"zitao",
+    //
+    // }
 
     const dispatch =useDispatch()
 
+    const decideMessage= ID=>{
+        if(ID==="0"){
+            return {
+                message:props.message,
+                isValid: undefined}
+        }else{
+            return {
+                message:props.message,
+                isValid: true}
+        }
+    }
 
-    const [message, setMessage] = useState({
-        message:props.message,
-        isValid:undefined});
+
+
+    const [message, setMessage] = useState(()=> {
+        const initialState = decideMessage(props.postID);
+        return initialState;
+    });
 
 
     const onMessageInputChange = event => {
         setMessage({
-            text: event.target.value,
+            message: event.target.value,
             isValid:event.target.value.length > 0
         })
     }
@@ -37,13 +51,14 @@ const CommentCreator = props =>{
     const canSubmit = message.isValid && (loginState==="logged in")
 
     const onSubmit = () => {
+        console.log(message.message)
         let newComment = {
             // userID: user.id,
-            username: user.name,
+            username: user,
             text: message.message,
             timestamp: new Date().getTime()
         }
-        console.log(props.postID)
+        console.log(newComment)
         if (props.commentID==="0") {
             dispatch(ACTIONS.addComments(props.postID, newComment));
         }else{
@@ -55,7 +70,7 @@ const CommentCreator = props =>{
 
     const clearForm = () => {
         setMessage({
-            text:"",
+            message:"",
             isValid: undefined});
     }
 

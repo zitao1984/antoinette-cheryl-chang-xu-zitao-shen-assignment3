@@ -21,7 +21,90 @@ export const ACTIONS = {
 
     modifyLocalComments:(comments)=>({type:ACTION_TYPES.MODIFY_COMMENTS,payload:{comments:comments}}),
 
-  clearComments: ()=>{
+    login: (username) => ({type: ACTION_TYPES.LOGIN_SUCCESS, payload: {user:username}}),
+
+    updateErrMsg: (message) => ({type: ACTION_TYPES.UPDATE_ERR_MSG, payload: {errMsg: message}}),
+
+    signUp: (username) => {
+      // console.log("i am working")
+      return({type: ACTION_TYPES.LOGIN_SUCCESS, payload: {user:username}})},
+
+    leave: () => ({type: ACTION_TYPES.LOGOUT}),
+
+    initLogin: () => {
+        return dispatch => {
+            Axios.post("/api/users/login", {})
+                .then(res => {
+                    if(res.data.loggedIn){
+                        console.log(res.data.message);
+                        dispatch(ACTIONS.login(res.data.username));
+                    }
+                })
+                .catch(error => {
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                    dispatch(ACTIONS.updateErrMsg(error.response.data.message));
+                })
+        }
+    },
+
+    // login with username and password
+    regularLogin: (username, password) => {
+        return dispatch => {
+            Axios.post("/api/users/login", {username: username, password: password})
+                .then(res => {
+                    if (res.data.loggedIn) {
+                        console.log(res.data.message);
+                        console.log(res.data.username)
+                        dispatch(ACTIONS.login(res.data.username));
+                    }
+                })
+                .catch(error => {
+                    console.log("I am here")
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                    dispatch(ACTIONS.updateErrMsg(error.response.data.message));
+                })
+        }
+    },
+
+    logOut: (username)=>{
+        return dispatch => {
+            Axios.post("/api/users/logout", {username: username})
+                .then(res => {
+                    if (res.data.loggedOut) {
+                        console.log(res.data.message);
+                        dispatch(ACTIONS.leave());
+                    }
+                })
+                .catch(error => {
+                    console.log(error.response.status);
+                    console.log(error.response.data);
+                    dispatch(ACTIONS.updateErrMsg(error.response.data.message));
+                })
+        }
+    },
+
+    register: (username,password)=>{
+      return dispatch=>{
+        Axios.post("/api/users/register", {username: username, password: password})
+            .then(res => {
+                console.log(res)
+                if (res.data.signedUp) {
+                    // console.log(res.data.message);
+                    dispatch(ACTIONS.signUp(res.data.username));
+                }
+            })
+            .catch(error => {
+                console.log(error)
+                // console.log(error.response.status);
+                // console.log(error.response.data);
+                dispatch(ACTIONS.updateErrMsg(error.response.data.message));
+            })
+    }
+    },
+
+    clearComments: ()=>{
     return{
       type:ACTION_TYPES.CLEAR_COMMENTS,
       payload:{

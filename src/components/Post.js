@@ -2,6 +2,7 @@ import {useState} from "react";
 
 import {ACTIONS} from "../redux/actions";
 import PostModifyWindow from "./PostModifyWindow";
+import{useSelector} from "react-redux";
 
 import {useDispatch} from "react-redux";
 import {NOTE_TYPE} from "../redux/stateConstants";
@@ -21,17 +22,19 @@ import PostText from "./PostText";
  * @constructor
  */
 
-const Comment= props=>{
+const Post= props=>{
     const [modifyStatus, setModifyStatus]=useState(false)
     const dispatch = useDispatch();
-    // const user =useSelector(state=>state.user);
-    const user={
-        name:"zitao",
-    }
+    const user =useSelector(state=>state.user);
+    // const user={
+    //     name:"zitao",
+    // }
     //
     const time = new Date(props.post.timestamp)
+    console.log(user)
+    console.log(props.post.username)
 
-    const canSubmit = user.name===props.post.username
+    const canSubmit = user===props.post.username
 
 
     return (
@@ -58,6 +61,9 @@ const Comment= props=>{
                                     <Route path={"/post/"+props.postID}>
                                         <PostText post={props.post}/>
                                     </Route>
+                                    <Route path={"/post/zitaoshen"}>
+                                       <div>hello</div>
+                                    </Route>
                                 </Switch>
 
                                 </div>
@@ -82,4 +88,4 @@ const Comment= props=>{
 
 }
 
-export default Comment;
+export default Post;

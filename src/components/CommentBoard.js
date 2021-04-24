@@ -19,8 +19,7 @@ import {LOGIN_STATE} from "../redux/stateConstants";
 
 const CommentBoard = props=>{
 
-    // const loginState = useSelector(state => state.login.loginState);
-    const loginState = LOGIN_STATE.LOGGED_IN
+
     const dispatch =useDispatch();
 
     useEffect(() => {

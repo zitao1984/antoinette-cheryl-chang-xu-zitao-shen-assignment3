@@ -3,6 +3,7 @@ import {useState} from "react";
 import {ACTIONS} from "../redux/actions";
 import CommentModifyWindow from "./CommentModifyWindow";
 import {useDispatch} from "react-redux";
+import {useSelector} from "react-redux";
 
 /**
  *
@@ -14,14 +15,14 @@ import {useDispatch} from "react-redux";
 const Comment= props=>{
     const [modifyStatus, setModifyStatus]=useState(false)
     const dispatch = useDispatch();
-    // const user =useSelector(state=>state.user);
-    const user={
-        name:"zitao",
-    }
+    const user =useSelector(state=>state.user);
+    // const user={
+    //     name:"zitao",
+    // }
     //
      const time = new Date(props.comment.timestamp)
 
-    const canSubmit = user.name===props.comment.username
+    const canSubmit = user===props.comment.username
     console.log(props.postID)
 
     return (
