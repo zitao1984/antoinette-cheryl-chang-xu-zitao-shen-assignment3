@@ -1,10 +1,9 @@
-import React from 'react'
+import React from "react";
 
 // props.postID
 //props.post
 
 function Card(props) {
-
   const postID = props.postID;
   const post = props.post;
 
@@ -18,15 +17,17 @@ function Card(props) {
         <p>{`username: ${post.username}`}</p>
         <p>{`userID: ${post.userID}`}</p>
         <p>{`TYPE: ${post.type}`}</p>
-        {post.type === 'TEXT' ? 
-          <p>{`text: ${post.text}`}</p> : <p>{`url: ${post.url}`}</p>
-        }
+        {post.type === "TEXT" ? (
+          <p>{`text: ${post.text}`}</p>
+        ) : (
+          <p>{`url: ${post.url}`}</p>
+        )}
       </div>
       <div className="card-footer text-muted">
         {new Date(post.timestamp).toLocaleString()}
       </div>
     </div>
-  )
+  );
 }
 
 export default Card;

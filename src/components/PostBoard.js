@@ -1,13 +1,11 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {ACTIONS} from "../redux/actions";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ACTIONS } from "../redux/actions";
 import Post from "./Post";
 
-
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faReply,faEnvelopeOpen} from "@fortawesome/free-solid-svg-icons";
-import {LOGIN_STATE} from "../redux/stateConstants";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faReply, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
+import { LOGIN_STATE } from "../redux/stateConstants";
 
 /**
  *
@@ -16,30 +14,31 @@ import {LOGIN_STATE} from "../redux/stateConstants";
  * @constructor
  */
 
+const PostBoard = () => {
+  // const dispatch =useDispatch();
+  // useEffect(() => {
+  //     dispatch(ACTIONS.getPosts())
+  // }, [dispatch]);
 
-const PostBoard = ()=>{
+  const currentPosts = useSelector((state) => state.posts.posts);
+  console.log(currentPosts);
 
-
-    // const dispatch =useDispatch();
-    // useEffect(() => {
-    //     dispatch(ACTIONS.getPosts())
-    // }, [dispatch]);
-
-    const currentPosts= useSelector(state=>state.posts.posts)
-    console.log(currentPosts)
-
-    return (
-        <div className={"p-2"}>
-            <h2>Post List</h2>
-            <div>
-                { // time order: from oldest to newest
-                    Object.entries(currentPosts).sort((a, b) => (a[1].timestamp - b[1].timestamp)).map(([postID, post], index) =>
-                    {return  <Post  postID={postID} post={post}/>})
-                }
-            </div>
+  return (
+    <div className="main-container">
+      <div className={"p-2"}>
+        {/* <h2>Post List</h2> */}
+        <div>
+          {
+            // time order: from oldest to newest
+            Object.entries(currentPosts)
+              .sort((a, b) => b[1].timestamp - a[1].timestamp)
+              .map(([postID, post], index) => {
+                return <Post postID={postID} post={post} />;
+              })
+          }
         </div>
-
-    )
-
-}
+      </div>
+    </div>
+  );
+};
 export default PostBoard;

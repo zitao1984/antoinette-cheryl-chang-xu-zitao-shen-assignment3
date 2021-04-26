@@ -1,0 +1,15 @@
+.post-row {
+  display: flex;
+  flex-direction: row;
+  flex: wrap;
+  justify-content: space-between;
+}
+
+.padding-top {
+  padding-top: 10px;
+}
+
+/* .post-justify {
+    display: flex;
+    flex-direction: row;
+} */

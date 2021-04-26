@@ -2,3 +2,43 @@
   width: 40%;
   white-space: pre-line;
 }
+
+/* .main-layout {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  height: auto;
+} */
+
+.general-padding {
+  padding: 20px;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.background {
+  background-color: aliceblue;
+}
+
+.title {
+  padding: 10px;
+  text-align: center;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.padding-30 {
+  padding: 30px;
+}
+
+.text-right {
+  text-align: right;
+}
