@@ -11,6 +11,7 @@ import PostText from "../components/PostText";
 import {useEffect} from "react";
 import Login from "../components/Login";
 import SignUp from "../components/signUp";
+import {useSelector} from "react-redux";
 
 const App = () => {
 
@@ -20,8 +21,10 @@ const App = () => {
     dispatch(ACTIONS.getPosts());
     dispatch(ACTIONS.initLogin())
 
-
   }, [dispatch])
+
+  // const postID = useSelector(state =>state.posts.posts)
+  // console.log(state)
 
   const newPost = () => {
     return {
@@ -36,6 +39,10 @@ const App = () => {
   }
 
   const testPost =newPost()
+
+  // import {useSelector} from "react-redux";
+  // const currentPost = useSelector(state=>state.posts.posts)
+  // console.log(currentPost)
 
 
   return (
@@ -60,9 +67,9 @@ const App = () => {
       <Route path="/signup">
         <SignUp />
       </Route>
-
+      {/*"/comment/:postId"*/}
             {/*<Route path={"/post/:postId"}>*/}
-            {/*  <PostText post={testPost}/>*/}
+            {/*  <PostText post={somePostObject}/>*/}
             {/*</Route>*/}
             {/*<Route path={"/post/zitaoshen"}>*/}
             {/*  <div>hello</div>*/}
