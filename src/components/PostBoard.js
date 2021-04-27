@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { ACTIONS } from "../redux/actions";
+import { useSelector } from "react-redux";
 import Post from "./Post";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReply, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
-import { LOGIN_STATE } from "../redux/stateConstants";
 
 /**
  *

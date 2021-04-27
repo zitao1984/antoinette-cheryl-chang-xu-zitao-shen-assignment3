@@ -6,9 +6,7 @@ import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
 import { NOTE_TYPE } from "../redux/stateConstants";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import CommentBoard from "./CommentBoard";
-import PostBoard from "./PostBoard";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots, faNewspaper } from "@fortawesome/free-solid-svg-icons";
 
@@ -27,10 +25,10 @@ const Post = (props) => {
 
   useEffect(() => {
     if (props.post.url === undefined) {
-    } else if (props.post.url.substring(0, 7) !== "http://") {
-      checkUrl("http://" + props.post.url);
-    } else if (props.post.url.substring(0, 8) !== "https://") {
-      checkUrl("https://" + props.post.url);
+    } else if (props.post.url.substring(0, 8) === "https://") {
+      checkUrl(props.post.url.substring("https://".length));
+    } else if (props.post.url.substring(0, 7) === "http://") {
+      checkUrl(props.post.url.substring("http://".length));
     } else {
       checkUrl(props.post.url);
     }
@@ -75,7 +73,7 @@ const Post = (props) => {
             </div>
           ) : (
             <div>
-              <a href={url}>
+              <a href={"//" + url}>
                 <h3 className="card-text mt-3 message">{props.post.title}</h3>
               </a>
             </div>
@@ -114,7 +112,7 @@ const Post = (props) => {
                 </button>
               </div>
             ) : (
-              <div></div>
+              " "
             )}
 
             {canSubmit ? (

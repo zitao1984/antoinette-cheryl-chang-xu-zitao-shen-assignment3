@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NOTE_TYPE, LOGIN_STATE } from "../redux/stateConstants";
+import { NOTE_TYPE } from "../redux/stateConstants";
 import { ACTIONS } from "../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";

@@ -41,7 +41,6 @@ const Login = () => {
     <div className="main-container padding-10">
       <div className={"title"}>
         {loginState === LOGIN_STATE.LOGGED_IN ? (
-          //   <div className="post-generator my-3 post-card">
           <div className="title">
             <h1 className="text-center">
               Welcome back, {user}! <FontAwesomeIcon icon={faUser} />

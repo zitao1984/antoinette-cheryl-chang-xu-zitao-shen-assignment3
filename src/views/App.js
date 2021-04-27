@@ -1,11 +1,8 @@
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ACTIONS } from "../redux/actions";
-import MainView from "./MainView";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import PostCreator from "../components/PostCreator";
-import CommentBoard from "../components/CommentBoard";
-import uuid from "react-uuid";
-import { emptyPost, NOTE_TYPE } from "../redux/stateConstants";
+import { NOTE_TYPE } from "../redux/stateConstants";
 import PostBoard from "../components/PostBoard";
 import PostText from "../components/PostText";
 import { useEffect } from "react";
@@ -39,7 +36,6 @@ const App = () => {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path="/test" component={MainView} />
         <Route path="/post" exact component={PostBoard} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />

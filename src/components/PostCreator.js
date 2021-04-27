@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NOTE_TYPE, emptyPost, LOGIN_STATE } from "../redux/stateConstants";
+import { NOTE_TYPE, emptyPost } from "../redux/stateConstants";
 import { ACTIONS } from "../redux/actions";
 const { v4: uuid } = require("uuid");
 

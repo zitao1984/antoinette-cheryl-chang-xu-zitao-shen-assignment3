@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTIONS, validateUser } from "../redux/actions";
-import { LOGIN_STATE } from "../redux/stateConstants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 let editingBegun = false;
 
@@ -87,9 +87,11 @@ const SignUp = () => {
         <div className="row">
           <p className="text-danger">{errMsg}</p>
           <div className="col">
-            <button className="btn btn-secondary" onClick={handleLogin}>
-              Sign up <FontAwesomeIcon icon={faSignInAlt} />
-            </button>
+            <Link to="/login">
+              <button className="btn btn-secondary" onClick={handleLogin}>
+                Sign up <FontAwesomeIcon icon={faSignInAlt} />
+              </button>
+            </Link>
           </div>
         </div>
       </div>

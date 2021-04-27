@@ -5,8 +5,7 @@ import CommentCreator from "./CommentCreator";
 
 import Comment from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReply, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
-import { LOGIN_STATE } from "../redux/stateConstants";
+import { faReply } from "@fortawesome/free-solid-svg-icons";
 
 /**
  *
