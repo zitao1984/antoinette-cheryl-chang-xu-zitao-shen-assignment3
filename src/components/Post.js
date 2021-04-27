@@ -27,14 +27,15 @@ const Post = (props) => {
 
   useEffect(() => {
     if (props.post.url === undefined) {
-    } else if (props.post.url.substring(0, 7) !== "http://") {
-      checkUrl("http://" + props.post.url);
-    } else if (props.post.url.substring(0, 8) !== "https://") {
-      checkUrl("https://" + props.post.url);
+    } else if (props.post.url.substring(0,8) === "https://") {
+      checkUrl(props.post.url.substring("https://".length));
+    } else if (props.post.url.substring(0, 7) === "http://") {
+      checkUrl(props.post.url.substring("http://".length));
     } else {
       checkUrl(props.post.url);
     }
   }, [props.post]);
+  console.log(url)
 
   const time = new Date(props.post.timestamp);
   console.log(user);
@@ -75,7 +76,7 @@ const Post = (props) => {
             </div>
           ) : (
             <div>
-              <a href={url}>
+              <a href={"//"+url}>
                 <h3 className="card-text mt-3 message">{props.post.title}</h3>
               </a>
             </div>
