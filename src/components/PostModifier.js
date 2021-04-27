@@ -14,11 +14,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const PostModifier = (props) => {
   const loginState = useSelector((state) => state.login.loginState);
-  // const loginState = LOGIN_STATE.LOGGED_IN
   const user = useSelector((state) => state.user);
-  // const user={
-  //     name:"zitao",
-  // }
   const dispatch = useDispatch();
 
   const decideTitle = (ID) => {

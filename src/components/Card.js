@@ -1,8 +1,5 @@
 import React from "react";
 
-// props.postID
-//props.post
-
 function Card(props) {
   const postID = props.postID;
   const post = props.post;

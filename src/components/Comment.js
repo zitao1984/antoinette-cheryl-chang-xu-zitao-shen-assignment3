@@ -16,10 +16,7 @@ const Comment = (props) => {
   const [modifyStatus, setModifyStatus] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  // const user={
-  //     name:"zitao",
-  // }
-  //
+
   const time = new Date(props.comment.timestamp);
   console.log(time);
 

@@ -23,7 +23,6 @@ const CommentBoard = (props) => {
   }, [dispatch]);
 
   const currentComments = useSelector((state) => state.comments.comments);
-  // const orderComments = currentComments.sort((a, b) => (a.post_time > b.post_time) ? 1 : -1)
 
   const time = new Date(props.post.timestamp);
   console.log(props.postID);

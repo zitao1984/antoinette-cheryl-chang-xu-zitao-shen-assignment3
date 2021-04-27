@@ -11,14 +11,7 @@ import { LOGIN_STATE } from "../redux/stateConstants";
  */
 const CommentCreator = (props) => {
   const loginState = useSelector((state) => state.login.loginState);
-
   const user = useSelector((state) => state.user);
-  // const loginState = LOGIN_STATE.LOGGED_IN
-  // const user={
-  //     name:"zitao",
-  //
-  // }
-
   const dispatch = useDispatch();
 
   const decideMessage = (ID) => {

@@ -1,11 +1,9 @@
-import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NOTE_TYPE, emptyPost, LOGIN_STATE } from "../redux/stateConstants";
 import { ACTIONS } from "../redux/actions";
-const { v4: uuid } = require('uuid');
-
-
+const { v4: uuid } = require("uuid");
 
 /**
  *
@@ -21,8 +19,8 @@ const PostCreator = (props) => {
   const dispatch = useDispatch();
 
   const postID = props.match.params.postID;
-  const newPostID = uuid()
-  console.log(newPostID)
+  const newPostID = uuid();
+  console.log(newPostID);
   console.log(postID);
 
   const decideTitle = (ID) => {
@@ -127,12 +125,11 @@ const PostCreator = (props) => {
       url: url.url,
       title: title.title,
       timestamp: new Date().getTime(),
-      // userID: user.id,
       username: user,
     };
     if (postID === "0") {
       console.log(newPost);
-      dispatch(ACTIONS.addPost(newPostID,newPost));
+      dispatch(ACTIONS.addPost(newPostID, newPost));
       dispatch(ACTIONS.getPosts());
     } else {
       dispatch(ACTIONS.modifyPost(postID, newPost));
@@ -299,33 +296,27 @@ const PostCreator = (props) => {
 
         <div className="row my-2">
           <div className="col text-center padding-10">
-            {type === NOTE_TYPE.TEXT ?
-                (
-                    <Link to={"/posttext/" + newPostID}>
-                  <button
-                      className="btn btn-primary btn-lg"
-                      type="submit"
-                      disabled={!canSubmit}
-                      onClick={() => onSubmit()}
-                  >
-                    submit{" "}
-                  </button>
-                </Link> ):
-                (
-                    <button
-                        className="btn btn-primary btn-lg"
-                        type="submit"
-                        disabled={!canSubmit}
-                        onClick={() => onSubmit()}
-                    >
-                      submit{" "}
-                    </button>
-
-                )
-
-
-            }
-
+            {type === NOTE_TYPE.TEXT ? (
+              <Link to={"/posttext/" + newPostID}>
+                <button
+                  className="btn btn-primary btn-lg"
+                  type="submit"
+                  disabled={!canSubmit}
+                  onClick={() => onSubmit()}
+                >
+                  submit{" "}
+                </button>
+              </Link>
+            ) : (
+              <button
+                className="btn btn-primary btn-lg"
+                type="submit"
+                disabled={!canSubmit}
+                onClick={() => onSubmit()}
+              >
+                submit{" "}
+              </button>
+            )}
           </div>
         </div>
       </div>

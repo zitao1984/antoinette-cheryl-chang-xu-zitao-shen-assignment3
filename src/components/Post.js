@@ -100,21 +100,6 @@ const Post = (props) => {
               <div></div>
             )}
 
-            {/* {props.post.type === NOTE_TYPE.TEXT ? (
-              <div className="footer-col">
-                <Link to={"/posttext/" + props.postID}>
-                  <button type="button" className="btn btn-primary">
-                    View Text
-                  </button>
-                </Link>
-              </div>
-            ) : (
-              <div className="footer-col">
-                <a href={url}>
-                  <button className="btn btn-primary">View Link</button>
-                </a>
-              </div>
-            )} */}
             {canSubmit ? (
               <div className="footer-col">
                 <button

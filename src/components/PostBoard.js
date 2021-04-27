@@ -15,11 +15,6 @@ import { LOGIN_STATE } from "../redux/stateConstants";
  */
 
 const PostBoard = () => {
-  // const dispatch =useDispatch();
-  // useEffect(() => {
-  //     dispatch(ACTIONS.getPosts())
-  // }, [dispatch]);
-
   const currentPosts = useSelector((state) => state.posts.posts);
   console.log(currentPosts);
 

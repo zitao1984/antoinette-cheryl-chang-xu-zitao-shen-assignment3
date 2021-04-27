@@ -14,12 +14,6 @@ const NavBar = (props) => {
   const postID = "0";
   const post = emptyPost;
 
-  // const time = new Date(props.post.timestamp);
-  // console.log(user);
-  // console.log(props.post.username);
-
-  // const canSubmit = user === props.post.username;
-
   return (
     <div className="nav">
       <div className="nav-title">
