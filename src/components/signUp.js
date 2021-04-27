@@ -37,11 +37,11 @@ const SignUp = () => {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-container padding-10">
       <div className={"title"}>
-        <h2 className={"display-5 font-weight-bold text-dark"}>
-          <FontAwesomeIcon icon={faUserPlus} />
-        </h2>
+        <h1 className="text-center">
+          Sign Up <FontAwesomeIcon icon={faUserPlus} />
+        </h1>
         <div className="row my-4 add-form">
           <div className="col-12 col-sm-2">
             <label htmlFor="username" className="form-label h5">

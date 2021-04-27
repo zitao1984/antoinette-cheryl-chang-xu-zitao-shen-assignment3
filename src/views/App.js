@@ -48,7 +48,7 @@ const App = () => {
         <Route path="/post" exact component={PostBoard} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={SignUp} />
-        <Route path="/postcreate" component={PostCreator} />
+        <Route path="/postcreate/:postID" component={PostCreator} />
         {/* <Route path="/comments/:postID" component={CommentBoard} /> */}
         {/* <Route path="/text/:postID" component={PostText} /> */}
         <Route path="/posttext/:postID" component={PostText} />

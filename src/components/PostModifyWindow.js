@@ -1,6 +1,6 @@
-import Modal from 'react-bootstrap/Modal'
-import PostCreator from "./PostCreator";
-import {NOTE_TYPE} from "../redux/stateConstants";
+import Modal from "react-bootstrap/Modal";
+import PostModifer from "./PostModifier";
+import { NOTE_TYPE } from "../redux/stateConstants";
 
 /**
  *
@@ -8,24 +8,27 @@ import {NOTE_TYPE} from "../redux/stateConstants";
  * @returns {JSX.Element}
  * @constructor
  */
-const PostModifyWindow= props=>{
-    return (
-        <Modal
-            {...props}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Modify your post
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <PostCreator postID={props.postID}  post={props.post} onHide={props.onHide}/>
-            </Modal.Body>
-        </Modal>
-    );
-
-}
+const PostModifyWindow = (props) => {
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Modify Your Post
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <PostModifer
+          postID={props.postID}
+          post={props.post}
+          onHide={props.onHide}
+        />
+      </Modal.Body>
+    </Modal>
+  );
+};
 export default PostModifyWindow;

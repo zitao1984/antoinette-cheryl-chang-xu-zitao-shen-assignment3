@@ -1,7 +1,7 @@
-import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {ACTIONS} from "../redux/actions";
-import {LOGIN_STATE} from "../redux/stateConstants";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ACTIONS } from "../redux/actions";
+import { LOGIN_STATE } from "../redux/stateConstants";
 
 /**
  *
@@ -9,96 +9,116 @@ import {LOGIN_STATE} from "../redux/stateConstants";
  * @returns {JSX.Element}
  * @constructor
  */
-const CommentCreator = props =>{
-    const loginState = useSelector(state => state.login.loginState);
+const CommentCreator = (props) => {
+  const loginState = useSelector((state) => state.login.loginState);
 
-    const user =useSelector(state=>state.user);
-    // const loginState = LOGIN_STATE.LOGGED_IN
-    // const user={
-    //     name:"zitao",
-    //
-    // }
+  const user = useSelector((state) => state.user);
+  // const loginState = LOGIN_STATE.LOGGED_IN
+  // const user={
+  //     name:"zitao",
+  //
+  // }
 
-    const dispatch =useDispatch()
+  const dispatch = useDispatch();
 
-    const decideMessage= ID=>{
-        if(ID==="0"){
-            return {
-                message:props.message,
-                isValid: undefined}
-        }else{
-            return {
-                message:props.message,
-                isValid: true}
-        }
+  const decideMessage = (ID) => {
+    if (ID === "0") {
+      return {
+        message: props.message,
+        isValid: undefined,
+      };
+    } else {
+      return {
+        message: props.message,
+        isValid: true,
+      };
     }
+  };
 
+  const [message, setMessage] = useState(() => {
+    const initialState = decideMessage(props.postID);
+    return initialState;
+  });
 
-
-    const [message, setMessage] = useState(()=> {
-        const initialState = decideMessage(props.postID);
-        return initialState;
+  const onMessageInputChange = (event) => {
+    setMessage({
+      message: event.target.value,
+      isValid: event.target.value.length > 0,
     });
+  };
 
+  const canSubmit = message.isValid && loginState === "logged in";
 
-    const onMessageInputChange = event => {
-        setMessage({
-            message: event.target.value,
-            isValid:event.target.value.length > 0
-        })
+  const onSubmit = () => {
+    console.log(message.message);
+    let newComment = {
+      // userID: user.id,
+      username: user,
+      text: message.message,
+      timestamp: new Date().getTime(),
+    };
+    console.log(newComment);
+    if (props.commentID === "0") {
+      dispatch(ACTIONS.addComments(props.postID, newComment));
+    } else {
+      dispatch(
+        ACTIONS.modifyComment(props.postID, props.commentID, newComment)
+      );
+      props.onHide(false);
     }
+    clearForm();
+  };
 
-    const canSubmit = message.isValid && (loginState==="logged in")
+  const clearForm = () => {
+    setMessage({
+      message: "",
+      isValid: undefined,
+    });
+  };
 
-    const onSubmit = () => {
-        console.log(message.message)
-        let newComment = {
-            // userID: user.id,
-            username: user,
-            text: message.message,
-            timestamp: new Date().getTime()
-        }
-        console.log(newComment)
-        if (props.commentID==="0") {
-            dispatch(ACTIONS.addComments(props.postID, newComment));
-        }else{
-            dispatch(ACTIONS.modifyComment(props.postID, props.commentID,newComment));
-            props.onHide(false);
-        }
-        clearForm();
-    }
-
-    const clearForm = () => {
-        setMessage({
-            message:"",
-            isValid: undefined});
-    }
-
-    return (
-        <div className={"p-3"}>
-            <div className="row my-2">
-                <label className="col-sm-3 col-form-label text-center fst-italic h5" htmlFor="message">Message:</label>
-                <div className="col-sm-9">
-            <textarea id="message" className="form-control"
-                      value={message.message}
-                      onChange={e => onMessageInputChange(e)}/>
-                    <div className="invalid-feedback" style={message.isValid === false ? {display:"block"} : {display: "none"}}>Message cannot be empty</div>
-                </div>
-            </div>
-
-            <div className="row my-2">
-                <div className="col text-end">
-                    <button className="btn btn-primary btn-lg" type="submit" disabled={!canSubmit} onClick={()=>onSubmit()}>submit </button>
-                </div>
-            </div>
-
+  return (
+    <div className={"p-3"}>
+      <div className="row my-2">
+        <label
+          className="col-sm-3 col-form-label text-center h5"
+          htmlFor="message"
+        >
+          Message:
+        </label>
+        <div className="col-sm-9">
+          <textarea
+            id="message"
+            className="form-control"
+            value={message.message}
+            onChange={(e) => onMessageInputChange(e)}
+          />
+          <div
+            className="invalid-feedback"
+            style={
+              message.isValid === false
+                ? { display: "block" }
+                : { display: "none" }
+            }
+          >
+            Message cannot be empty
+          </div>
         </div>
+      </div>
 
+      <div className="row my-2">
+        <div className="col text-center padding-10">
+          <button
+            className="btn btn-primary btn-lg"
+            type="submit"
+            disabled={!canSubmit}
+            onClick={() => onSubmit()}
+          >
+            submit{" "}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-
-    )
-
-
-}
-
-export default  CommentCreator;
+export default CommentCreator;

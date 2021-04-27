@@ -9,7 +9,16 @@
   padding-top: 10px;
 }
 
-/* .post-justify {
-    display: flex;
-    flex-direction: row;
-} */
+.footer-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+}

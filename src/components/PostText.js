@@ -51,7 +51,7 @@ const PostText = (props) => {
                 </div>
               ) : (
                 <div>
-                  Web Link <FontAwesomeIcon icon={faNewspaper} />
+                  Link <FontAwesomeIcon icon={faNewspaper} />
                 </div>
               )}
               <div>Posted on: {time.toLocaleString()}</div>

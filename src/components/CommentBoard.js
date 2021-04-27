@@ -18,25 +18,12 @@ import { LOGIN_STATE } from "../redux/stateConstants";
 const CommentBoard = (props) => {
   const dispatch = useDispatch();
 
-  //   const postID = props.match.params.postID;
-  //   console.log(postID);
-
   useEffect(() => {
     dispatch(ACTIONS.getComments(props.postID));
   }, [dispatch]);
 
   const currentComments = useSelector((state) => state.comments.comments);
   // const orderComments = currentComments.sort((a, b) => (a.post_time > b.post_time) ? 1 : -1)
-
-  //   const allPosts = useSelector((state) => state.posts.posts);
-  //   console.log(allPosts);
-
-  // Convert the allPosts object into a map to get post object by postID
-  //   const allPostsMap = new Map(Object.entries(allPosts));
-  //   console.log(allPostsMap);
-
-  //   const currentPost = allPostsMap.get(postID);
-  //   console.log(currentPost);
 
   const time = new Date(props.post.timestamp);
   console.log(props.postID);
@@ -56,7 +43,7 @@ const CommentBoard = (props) => {
         </div>
         <div>
           {
-            // time order: from newest to oldest
+            // time order: from oldest to newest
             Object.entries(currentComments)
               .sort((a, b) => a[1].timestamp - b[1].timestamp)
               .map(([commentID, comment], index) => {

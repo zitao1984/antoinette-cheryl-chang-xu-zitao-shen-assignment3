@@ -1,17 +1,18 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useState, useSelector } from "react-redux";
 import { ACTIONS } from "../redux/actions";
-import { LOGIN_STATE } from "../redux/stateConstants";
+import { emptyPost, LOGIN_STATE } from "../redux/stateConstants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCog } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = (props) => {
-  // const [modifyStatus, setModifyStatus] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const loginState = useSelector((state) => state.login.loginState);
   // const postID = props.match.params.postID;
+  const postID = "0";
+  const post = emptyPost;
 
   // const time = new Date(props.post.timestamp);
   // console.log(user);
@@ -31,11 +32,7 @@ const NavBar = (props) => {
         <div>
           <div className="padding-10">
             <Link to="/post">
-              <button
-                type="button"
-                className="btn btn-light btn-lg"
-                // onClick={() => dispatch(selectCardBeZero())}
-              >
+              <button type="button" className="btn btn-light btn-lg">
                 Home
               </button>
             </Link>
@@ -44,14 +41,10 @@ const NavBar = (props) => {
         <div>
           <div className="padding-10">
             {loginState === LOGIN_STATE.LOGGED_IN ? (
-              <div>
-                <Link to={"/postcreate/"}>
-                  <button
-                    type="button"
-                    className="btn btn-light btn-lg"
-                    // onClick={() => dispatch(selectCardBeZero())}
-                  >
-                    Create a Post
+              <div className="post-row">
+                <Link to="/login">
+                  <button type="button" className="btn btn-light btn-lg">
+                    {user} <FontAwesomeIcon icon={faUserCog} />
                   </button>
                 </Link>
               </div>
@@ -71,8 +64,12 @@ const NavBar = (props) => {
             {loginState === LOGIN_STATE.LOGGED_IN ? (
               <div className="post-row">
                 <Link to="/login">
-                  <button type="button" className="btn btn-light btn-lg">
-                    {user} <FontAwesomeIcon icon={faUserCog} />
+                  <button
+                    type="button"
+                    className="btn btn-light btn-lg"
+                    onClick={() => dispatch(ACTIONS.logOut(user))}
+                  >
+                    Log Out
                   </button>
                 </Link>
               </div>

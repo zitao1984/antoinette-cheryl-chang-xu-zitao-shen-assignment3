@@ -50,15 +50,13 @@ const Post = (props) => {
               </div>
             ) : (
               <div>
-                Web Link <FontAwesomeIcon icon={faNewspaper} />
+                Link <FontAwesomeIcon icon={faNewspaper} />
               </div>
             )}
             <div>Posted on: {time.toLocaleString()}</div>
           </div>
           <div>
-            <a href={"https://" + props.post.url}>
-              <h3 className="card-text mt-3 message">{props.post.title}</h3>
-            </a>
+            <h3 className="card-text mt-3 message">{props.post.title}</h3>
           </div>
           <div>
             <p className="card-subtitle padding-top">
@@ -68,8 +66,8 @@ const Post = (props) => {
         </div>
 
         <div className="card-footer">
-          <div className="row">
-            <div className="col">
+          <div className="footer-row">
+            <div className="footer-col">
               <Link to={"/posttext/" + props.postID}>
                 <button type="button" className="btn btn-primary">
                   Comments
@@ -77,74 +75,55 @@ const Post = (props) => {
               </Link>
             </div>
             {props.post.type === NOTE_TYPE.TEXT ? (
-              <div className="col">
+              <div className="footer-col">
                 <Link to={"/posttext/" + props.postID}>
                   <button type="button" className="btn btn-primary">
                     View Text
                   </button>
                 </Link>
-                {/* <button
-                  className="btn btn-primary"
-                  onCLick={() =>
-                    dispatch(ACTIONS.getComments(props.post.postID))
-                  }
-                >
-                  See Text{" "}
-                </button> */}
               </div>
             ) : (
-              // <PostText post={props.post}/>
-              // (<Router>
-              //         <div>
-              //             <Link to={"/post/"+props.postID} target="_blank">see text</Link>
-              //         <Switch>
-              //             <Route path={"/post/"+props.postID}>
-              //                 <PostText post={props.post}/>
-              //             </Route>
-              //             <Route path={"/post/zitaoshen"}>
-              //                <div>hello</div>
-              //             </Route>
-              //         </Switch>
-              //
-              //         </div>
-              //
-              //     </Router>
-              //
-              //
-              // )
-              <div className="col">
-                <a href={"https://" + props.post.url}>
+              <div className="footer-col">
+                <a href={props.post.url}>
                   <button className="btn btn-primary">View Link</button>
                 </a>
               </div>
             )}
-            <div className="col">
-              <button
-                className="btn btn-danger"
-                type="submit"
-                disabled={!canSubmit}
-                onClick={() => dispatch(ACTIONS.deletePost(props.postID))}
-              >
-                Delete{" "}
-              </button>
-            </div>
+            {canSubmit ? (
+              <div className="footer-col">
+                <button
+                  className="btn btn-danger"
+                  type="submit"
+                  disabled={!canSubmit}
+                  onClick={() => dispatch(ACTIONS.deletePost(props.postID))}
+                >
+                  Delete{" "}
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
 
-            <div className="col">
-              <button
-                className="btn btn-primary"
-                type="submit"
-                disabled={!canSubmit}
-                onClick={() => setModifyStatus(true)}
-              >
-                Modify{" "}
-              </button>
-              <PostModifyWindow
-                show={modifyStatus}
-                onHide={setModifyStatus}
-                postID={props.postID}
-                post={props.post}
-              />
-            </div>
+            {canSubmit ? (
+              <div className="footer-col">
+                <button
+                  className="btn btn-primary"
+                  type="submit"
+                  disabled={!canSubmit}
+                  onClick={() => setModifyStatus(true)}
+                >
+                  Modify{" "}
+                </button>
+                <PostModifyWindow
+                  show={modifyStatus}
+                  onHide={setModifyStatus}
+                  postID={props.postID}
+                  post={props.post}
+                />
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
       </div>
