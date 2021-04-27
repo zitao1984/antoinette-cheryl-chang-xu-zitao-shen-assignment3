@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import "./styles/styles.css";
 import "./styles/NavStyles.css";
 import "./styles/PostStyles.css";
+import "./styles/CommentStyles.css";
 import App from "./views/App";
 import reportWebVitals from "./reportWebVitals";
 

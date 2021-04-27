@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 import { ACTIONS } from "../redux/actions";
 import PostModifyWindow from "./PostModifyWindow";
@@ -21,22 +21,18 @@ import { faCommentDots, faNewspaper } from "@fortawesome/free-solid-svg-icons";
 
 const Post = (props) => {
   const [modifyStatus, setModifyStatus] = useState(false);
-  const [url,checkUrl]=useState("")
+  const [url, checkUrl] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
-
-
   useEffect(() => {
-    if (props.post.url===undefined){}
-    else if (props.post.url.substring(0, 7) !== 'http://'){
-      checkUrl('http://'+ props.post.url)
-    }
-    else {
-      checkUrl(props.post.url)
+    if (props.post.url === undefined) {
+    } else if (props.post.url.substring(0, 7) !== "http://") {
+      checkUrl("http://" + props.post.url);
+    } else {
+      checkUrl(props.post.url);
     }
   }, [props.post]);
-
 
   const time = new Date(props.post.timestamp);
   console.log(user);
@@ -66,9 +62,23 @@ const Post = (props) => {
             )}
             <div>Posted on: {time.toLocaleString()}</div>
           </div>
-          <div>
-            <h3 className="card-text mt-3 message">{props.post.title}</h3>
-          </div>
+
+          {props.post.type === NOTE_TYPE.TEXT ? (
+            <div>
+              <Link to={"/posttext/" + props.postID}>
+                <h3 type="button" className="card-text mt-3 message">
+                  {props.post.title}
+                </h3>
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <a href={url}>
+                <h3 className="card-text mt-3 message">{props.post.title}</h3>
+              </a>
+            </div>
+          )}
+
           <div>
             <p className="card-subtitle padding-top">
               By: {props.post.username}
@@ -78,14 +88,19 @@ const Post = (props) => {
 
         <div className="card-footer">
           <div className="footer-row">
-            <div className="footer-col">
-              <Link to={"/posttext/" + props.postID}>
-                <button type="button" className="btn btn-primary">
-                  Comments
-                </button>
-              </Link>
-            </div>
-            {props.post.type === NOTE_TYPE.TEXT ? (
+            {props.post.type === NOTE_TYPE.LINK ? (
+              <div className="footer-col">
+                <Link to={"/posttext/" + props.postID}>
+                  <button type="button" className="btn btn-primary">
+                    Comments
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              <div></div>
+            )}
+
+            {/* {props.post.type === NOTE_TYPE.TEXT ? (
               <div className="footer-col">
                 <Link to={"/posttext/" + props.postID}>
                   <button type="button" className="btn btn-primary">
@@ -94,12 +109,12 @@ const Post = (props) => {
                 </Link>
               </div>
             ) : (
-                <div className="footer-col">
-                    <a href={url}>
-                        <button className="btn btn-primary">View Link</button>
-                      </a>
+              <div className="footer-col">
+                <a href={url}>
+                  <button className="btn btn-primary">View Link</button>
+                </a>
               </div>
-            )}
+            )} */}
             {canSubmit ? (
               <div className="footer-col">
                 <button

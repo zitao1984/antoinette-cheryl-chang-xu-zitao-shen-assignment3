@@ -59,6 +59,13 @@ const App = () => {
             return <Redirect to="/post" />;
           }}
         />
+        <Route
+          // path="/posttext/deleted"
+          // exact
+          render={() => {
+            return <Redirect to="/post" />;
+          }}
+        />
       </Switch>
     </BrowserRouter>
 

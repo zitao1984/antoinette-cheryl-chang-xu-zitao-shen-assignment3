@@ -1,0 +1,12 @@
+.comment-row {
+  display: flex;
+  flex-direction: row;
+  flex: wrap;
+  padding: 5px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.comment-column {
+  padding: 5px;
+}

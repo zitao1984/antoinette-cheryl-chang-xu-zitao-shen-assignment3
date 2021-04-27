@@ -32,10 +32,6 @@ const PostText = (props) => {
 
   let postExists = currentPost;
 
-  // console.log(props.thread)
-
-  //   const currentComments = useSelector((state) => state.comments.comments);
-
   return (
     <div>
       {!postExists ? (
