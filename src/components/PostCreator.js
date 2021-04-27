@@ -1,11 +1,11 @@
+import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NOTE_TYPE, emptyPost, LOGIN_STATE } from "../redux/stateConstants";
 import { ACTIONS } from "../redux/actions";
 const { v4: uuid } = require('uuid');
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faCommentDots, faNewspaper } from "@fortawesome/free-solid-svg-icons";
-// import { Link } from "react-router-dom";
+
+
 
 /**
  *
@@ -299,16 +299,33 @@ const PostCreator = (props) => {
 
         <div className="row my-2">
           <div className="col text-center padding-10">
-            {/* <Link to={"/posttext/" + props.postID}> */}
-            <button
-              className="btn btn-primary btn-lg"
-              type="submit"
-              disabled={!canSubmit}
-              onClick={() => onSubmit()}
-            >
-              submit{" "}
-            </button>
-            {/* </Link> */}
+            {type === NOTE_TYPE.TEXT ?
+                (
+                    <Link to={"/posttext/" + newPostID}>
+                  <button
+                      className="btn btn-primary btn-lg"
+                      type="submit"
+                      disabled={!canSubmit}
+                      onClick={() => onSubmit()}
+                  >
+                    submit{" "}
+                  </button>
+                </Link> ):
+                (
+                    <button
+                        className="btn btn-primary btn-lg"
+                        type="submit"
+                        disabled={!canSubmit}
+                        onClick={() => onSubmit()}
+                    >
+                      submit{" "}
+                    </button>
+
+                )
+
+
+            }
+
           </div>
         </div>
       </div>
