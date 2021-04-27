@@ -127,22 +127,39 @@ export const ACTIONS = {
 
   },
 
-  addPost: (post) => {
-    return dispatch => {
-      Axios.post("/api/posts", post)
-      .then((res) => {
-        console.log(`Post and new post id is ${res.data}`);
-        Axios.get("api/posts")
-        .then(res => {
-          console.log("GET after POST")
-          console.log(res.data);
-          dispatch(ACTIONS.addPostToLocal(res.data));
+  // addPost: (post) => {
+  //   return dispatch => {
+  //     Axios.post("/api/posts", post)
+  //     .then((res) => {
+  //       console.log(`Post and new post id is ${res.data}`);
+  //       Axios.get("api/posts")
+  //       .then(res => {
+  //         console.log("GET after POST")
+  //         console.log(res.data);
+  //         dispatch(ACTIONS.addPostToLocal(res.data));
+  //       })
+  //       .catch(error => console.log(error))
+  //     })
+  //     .catch(error => console.log(error));
+  //   }
+  // },
+
+    addPost: (postID,post) => {
+      return dispatch => {
+        Axios.post("/api/posts?postID="+postID, post)
+        .then((res) => {
+          console.log(`Post and new post id is ${res.data}`);
+          // Axios.get("api/posts")
+          // .then(res => {
+          //   console.log("GET after POST")
+          //   console.log(res.data);
+          //   dispatch(ACTIONS.addPostToLocal(res.data));
+          // })
+          // .catch(error => console.log(error))
         })
-        .catch(error => console.log(error))
-      })
-      .catch(error => console.log(error));
-    }
-  },
+        .catch(error => console.log(error));
+      }
+    },
 
   deletePost:(postID)=>{
     return dispatch =>{

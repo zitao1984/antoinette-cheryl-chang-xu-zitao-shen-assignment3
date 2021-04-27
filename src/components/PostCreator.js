@@ -2,9 +2,10 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NOTE_TYPE, emptyPost, LOGIN_STATE } from "../redux/stateConstants";
 import { ACTIONS } from "../redux/actions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCommentDots, faNewspaper } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+const { v4: uuid } = require('uuid');
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faCommentDots, faNewspaper } from "@fortawesome/free-solid-svg-icons";
+// import { Link } from "react-router-dom";
 
 /**
  *
@@ -16,14 +17,12 @@ import { Link } from "react-router-dom";
 const PostCreator = (props) => {
   let post = emptyPost;
   const loginState = useSelector((state) => state.login.loginState);
-  // const loginState = LOGIN_STATE.LOGGED_IN
   const user = useSelector((state) => state.user);
-  // const user={
-  //     name:"zitao",
-  // }
   const dispatch = useDispatch();
 
   const postID = props.match.params.postID;
+  const newPostID = uuid()
+  console.log(newPostID)
   console.log(postID);
 
   const decideTitle = (ID) => {
@@ -133,7 +132,7 @@ const PostCreator = (props) => {
     };
     if (postID === "0") {
       console.log(newPost);
-      dispatch(ACTIONS.addPost(newPost));
+      dispatch(ACTIONS.addPost(newPostID,newPost));
       dispatch(ACTIONS.getPosts());
     } else {
       dispatch(ACTIONS.modifyPost(postID, newPost));
