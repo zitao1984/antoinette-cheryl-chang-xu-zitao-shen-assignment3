@@ -29,6 +29,8 @@ const Post = (props) => {
     if (props.post.url === undefined) {
     } else if (props.post.url.substring(0, 7) !== "http://") {
       checkUrl("http://" + props.post.url);
+    } else if (props.post.url.substring(0, 8) !== "https://") {
+      checkUrl("https://" + props.post.url);
     } else {
       checkUrl(props.post.url);
     }
