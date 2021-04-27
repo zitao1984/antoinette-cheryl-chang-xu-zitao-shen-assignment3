@@ -10,9 +10,6 @@ const NavBar = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const loginState = useSelector((state) => state.login.loginState);
-  // const postID = props.match.params.postID;
-  const postID = "0";
-  const post = emptyPost;
 
   return (
     <div className="nav">

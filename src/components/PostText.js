@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CommentCreator from "./CommentCreator";
 import PostBoard from "./PostBoard";
 import { NOTE_TYPE } from "../redux/stateConstants";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Comment from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots, faNewspaper } from "@fortawesome/free-solid-svg-icons";
@@ -36,7 +36,7 @@ const PostText = (props) => {
     <div>
       {!postExists ? (
         <div>
-          <PostBoard></PostBoard>
+          <Redirect to="/post"></Redirect>
         </div>
       ) : (
         <div className="main-container padding-30">
