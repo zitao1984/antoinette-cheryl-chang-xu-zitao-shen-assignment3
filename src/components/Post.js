@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 import { ACTIONS } from "../redux/actions";
 import PostModifyWindow from "./PostModifyWindow";
@@ -21,12 +21,23 @@ import { faCommentDots, faNewspaper } from "@fortawesome/free-solid-svg-icons";
 
 const Post = (props) => {
   const [modifyStatus, setModifyStatus] = useState(false);
+  const [url,checkUrl]=useState("")
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  // const user={
-  //     name:"zitao",
-  // }
-  //
+
+
+
+  useEffect(() => {
+    if (props.post.url===undefined){}
+    else if (props.post.url.substring(0, 7) !== 'http://'){
+      checkUrl('http://'+ props.post.url)
+    }
+    else {
+      checkUrl(props.post.url)
+    }
+  }, [props.post]);
+
+
   const time = new Date(props.post.timestamp);
   console.log(user);
   console.log(props.post.username);
@@ -83,10 +94,10 @@ const Post = (props) => {
                 </Link>
               </div>
             ) : (
-              <div className="footer-col">
-                <a href={props.post.url}>
-                  <button className="btn btn-primary">View Link</button>
-                </a>
+                <div className="footer-col">
+                    <a href={url}>
+                        <button className="btn btn-primary">View Link</button>
+                      </a>
               </div>
             )}
             {canSubmit ? (
