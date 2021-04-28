@@ -8,7 +8,7 @@ import PostText from "../components/PostText";
 import { useEffect } from "react";
 import NavBar from "../components/NavBar";
 import Login from "../components/Login";
-import SignUp from "../components/signUp";
+import SignUp from "../components/SignUp";
 
 const App = () => {
   const dispatch = useDispatch();

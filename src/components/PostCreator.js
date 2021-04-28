@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NOTE_TYPE, emptyPost } from "../redux/stateConstants";
 import { ACTIONS } from "../redux/actions";
 const { v4: uuid } = require("uuid");
+
 
 /**
  *
@@ -118,7 +119,10 @@ const PostCreator = (props) => {
   let canSubmit =
     (linkNoteChecking() || textNoteChecking()) && loginState === "logged in";
 
+
+
   const onSubmit = () => {
+    // let history = useHistory()
     let newPost = {
       type: type,
       text: text.text,
@@ -131,6 +135,7 @@ const PostCreator = (props) => {
       console.log(newPost);
       dispatch(ACTIONS.addPost(newPostID, newPost));
       dispatch(ACTIONS.getPosts());
+      // history.push("/posttext/" + newPostID)
     } else {
       dispatch(ACTIONS.modifyPost(postID, newPost));
       props.onHide(false);
@@ -296,8 +301,8 @@ const PostCreator = (props) => {
 
         <div className="row my-2">
           <div className="col text-center padding-10">
-            {type === NOTE_TYPE.TEXT ? (
-              <Link to={"/posttext/" + newPostID}>
+            {/*{type === NOTE_TYPE.TEXT ? (*/}
+              <Link exact to={"/posttext/" + newPostID}>
                 <button
                   className="btn btn-primary btn-lg"
                   type="submit"
@@ -307,16 +312,16 @@ const PostCreator = (props) => {
                   submit{" "}
                 </button>
               </Link>
-            ) : (
-              <button
-                className="btn btn-primary btn-lg"
-                type="submit"
-                disabled={!canSubmit}
-                onClick={() => onSubmit()}
-              >
-                submit{" "}
-              </button>
-            )}
+            {/*) : (*/}
+            {/*  <button*/}
+            {/*    className="btn btn-primary btn-lg"*/}
+            {/*    type="submit"*/}
+            {/*    disabled={!canSubmit}*/}
+            {/*    onClick={() => onSubmit()}*/}
+            {/*  >*/}
+            {/*    submit{" "}*/}
+            {/*  </button>*/}
+            {/*)}*/}
           </div>
         </div>
       </div>
