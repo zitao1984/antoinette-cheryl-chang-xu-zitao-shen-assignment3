@@ -11,3 +11,6 @@ For web assignment3
 
 ### Web link
 You can visit the project [here](https://project-3-good-news.herokuapp.com/post) 
+
+### Summary
+[here](https://docs.google.com/document/d/1rgUISas-gBtJdfQBA99ZDFjduq7xA8xxpciSRFrADIA/edit)
