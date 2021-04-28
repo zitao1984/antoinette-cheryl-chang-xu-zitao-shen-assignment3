@@ -1,11 +1,14 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles/styles.css';
-import App from './views/App';
-import reportWebVitals from './reportWebVitals';
+import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
+import ReactDOM from "react-dom";
+import "./styles/styles.css";
+import "./styles/NavStyles.css";
+import "./styles/PostStyles.css";
+import "./styles/CommentStyles.css";
+import App from "./views/App";
+import reportWebVitals from "./reportWebVitals";
 
-import store from "./redux/store"; 
+import store from "./redux/store";
 import { Provider } from "react-redux";
 
 ReactDOM.render(
@@ -14,7 +17,7 @@ ReactDOM.render(
       <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

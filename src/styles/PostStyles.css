@@ -1,0 +1,23 @@
+.post-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.padding-top {
+  padding-top: 10px;
+}
+
+.footer-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 10px;
+}
