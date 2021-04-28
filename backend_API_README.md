@@ -31,7 +31,7 @@ Author: Chang Xu
 
 ## 3. Firebase Configuration
 
-A sample configuration could be found in [fbConfig.js](./backend-demo/fbConfig.js).
+A sample configuration could be found 
 
 
 ## 4. Data Format
