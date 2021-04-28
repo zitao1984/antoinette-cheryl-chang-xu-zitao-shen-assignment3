@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots, faNewspaper } from "@fortawesome/free-solid-svg-icons";
 import CommentBoard from "./CommentBoard";
+import {useEffect, useState} from "react";
 /**
  *
  * @param props post
@@ -23,6 +24,18 @@ const PostText = (props) => {
   const currentPost = allPostsMap.get(postID);
 
   let postExists = currentPost;
+  const changeUrl=() => {
+    if (currentPost.url === undefined) {
+    } else if (currentPost.url.substring(0, 8) === "https://") {
+      return (currentPost.url.substring("https://".length));
+    } else if (currentPost.url.substring(0, 7) === "http://") {
+      return (currentPost.url.substring("http://".length));
+    } else {
+      return (currentPost.url);
+    }
+  }
+
+  const url= changeUrl();
 
   return (
     <div>
@@ -60,8 +73,9 @@ const PostText = (props) => {
               <div className="card-body">
                 <h2 className="card-title">{currentPost.title}</h2>
                 <h5 className="card-subtitle">By: {currentPost.username} </h5>
-                {currentPost.type === NOTE_TYPE.LINK ? (
-                  <a href={"https://" + currentPost.url}>
+                {
+                  currentPost.type === NOTE_TYPE.LINK ? (
+                  <a href={"//" + url}>
                     <p className="card-text mt-3 thread-p ">
                       {currentPost.url}
                     </p>
