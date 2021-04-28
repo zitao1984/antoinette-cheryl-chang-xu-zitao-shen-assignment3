@@ -1,9 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import CommentCreator from "./CommentCreator";
-import PostBoard from "./PostBoard";
 import { NOTE_TYPE } from "../redux/stateConstants";
 import { Redirect } from "react-router-dom";
-import Comment from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots, faNewspaper } from "@fortawesome/free-solid-svg-icons";
 import CommentBoard from "./CommentBoard";
@@ -16,19 +13,14 @@ import CommentBoard from "./CommentBoard";
 
 const PostText = (props) => {
   const postID = props.match.params.postID;
-  console.log(postID);
-
   const allPosts = useSelector((state) => state.posts.posts);
-  console.log(allPosts);
   if (!allPosts || Object.keys(allPosts).length === 0) {
     return null;
   }
   // Convert the allPosts object into a map to get post object by postID
   const allPostsMap = new Map(Object.entries(allPosts));
-  console.log(allPostsMap);
 
   const currentPost = allPostsMap.get(postID);
-  console.log(currentPost);
 
   let postExists = currentPost;
 
@@ -36,7 +28,7 @@ const PostText = (props) => {
     <div>
       {!postExists ? (
         <div>
-          <Redirect to="/post"></Redirect>
+          <Redirect to="/post"/>
         </div>
       ) : (
         <div className="main-container padding-30">

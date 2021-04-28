@@ -23,11 +23,7 @@ const CommentBoard = (props) => {
 
   const currentComments = useSelector((state) => state.comments.comments);
 
-  const time = new Date(props.post.timestamp);
-  console.log(props.postID);
 
-  const state = useSelector((state) => state);
-  console.log(state);
 
   return (
     <div className="main-container padding-30">

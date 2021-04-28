@@ -13,8 +13,6 @@ const SignUp = () => {
   const errMsg = useSelector((state) => state.login.errMsg);
   const loginState = useSelector((state) => state.login.loginState);
 
-  const state = useSelector((state) => state);
-  console.log(state);
 
   const dispatch = useDispatch();
 

@@ -35,8 +35,7 @@ const Post = (props) => {
   }, [props.post]);
 
   const time = new Date(props.post.timestamp);
-  console.log(user);
-  console.log(props.post.username);
+
 
   const canSubmit = user === props.post.username;
 
@@ -66,7 +65,7 @@ const Post = (props) => {
           {props.post.type === NOTE_TYPE.TEXT ? (
             <div>
               <Link to={"/posttext/" + props.postID}>
-                <h3 type="button" className="card-text mt-3 message">
+                <h3  className="card-text mt-3 message">
                   {props.post.title}
                 </h3>
               </Link>
@@ -97,7 +96,7 @@ const Post = (props) => {
                 </Link>
               </div>
             ) : (
-              <div></div>
+              <div/>
             )}
 
             {canSubmit ? (
@@ -133,7 +132,7 @@ const Post = (props) => {
                 />
               </div>
             ) : (
-              <div></div>
+              <div/>
             )}
           </div>
         </div>

@@ -91,7 +91,6 @@ const Login = () => {
                   type="password"
                   id="password"
                   name="password"
-                  x
                   className="form-control"
                   value={password}
                   onChange={(e) => {

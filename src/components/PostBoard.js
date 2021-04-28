@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import Post from "./Post";
 
@@ -11,7 +11,7 @@ import Post from "./Post";
 
 const PostBoard = () => {
   const currentPosts = useSelector((state) => state.posts.posts);
-  console.log(currentPosts);
+
 
   return (
     <div className="main-container padding-10">

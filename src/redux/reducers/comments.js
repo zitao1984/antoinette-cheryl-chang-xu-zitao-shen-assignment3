@@ -17,8 +17,6 @@ export const commentsReducer = (state = INITIAL_STATE, action) => {
             return{comments:action.payload.comments};
         case ACTION_TYPES.CLEAR_COMMENTS:
             return{comments:action.payload.comments};
-        // case ACTION_TYPES.LOGOUT:
-        //     return INITIAL_STATE;
         default:
             return state;
     }

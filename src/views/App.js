@@ -18,19 +18,6 @@ const App = () => {
     dispatch(ACTIONS.initLogin());
   }, [dispatch]);
 
-  const newPost = () => {
-    return {
-      type: NOTE_TYPE.TEXT,
-      text: "kkkkkk",
-      url: "",
-      title: "Test Post",
-      timestamp: new Date().getTime(),
-      userID: "123",
-      username: "post-generator",
-    };
-  };
-
-  const testPost = newPost();
 
   return (
     <BrowserRouter>

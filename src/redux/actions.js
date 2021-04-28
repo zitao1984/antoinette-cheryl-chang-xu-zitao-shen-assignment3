@@ -6,8 +6,6 @@ export const ACTIONS = {
 
   updateLocalPosts: (posts) => ({type: ACTION_TYPES.GET_POSTS, payload: {posts:posts}}),
 
-  addPostToLocal: (posts) => ({type: ACTION_TYPES.POST_POST, payload: {posts:posts}}),
-
   deleteLocalPost: (posts) => ({type: ACTION_TYPES.DELETE_POST, payload: {posts:posts}}),
 
   modifyLocalPost: (posts) => ({type: ACTION_TYPES.MODIFY_POST, payload: {posts:posts}}),
@@ -36,13 +34,10 @@ export const ACTIONS = {
             Axios.post("/api/users/login", {})
                 .then(res => {
                     if(res.data.loggedIn){
-                        console.log(res.data.message);
                         dispatch(ACTIONS.login(res.data.username));
                     }
                 })
                 .catch(error => {
-                    console.log(error.response.status);
-                    console.log(error.response.data);
                     dispatch(ACTIONS.updateErrMsg(error.response.data.message));
                 })
         }
@@ -54,14 +49,10 @@ export const ACTIONS = {
             Axios.post("/api/users/login", {username: username, password: password})
                 .then(res => {
                     if (res.data.loggedIn) {
-                        console.log(res.data.message);
-                        console.log(res.data.username)
                         dispatch(ACTIONS.login(res.data.username));
                     }
                 })
                 .catch(error => {
-                    console.log(error.response.status);
-                    console.log(error.response.data);
                     dispatch(ACTIONS.updateErrMsg(error.response.data.message));
                 })
         }
@@ -72,13 +63,10 @@ export const ACTIONS = {
             Axios.post("/api/users/logout", {username: username})
                 .then(res => {
                     if (res.data.loggedOut) {
-                        console.log(res.data.message);
                         dispatch(ACTIONS.leave());
                     }
                 })
                 .catch(error => {
-                    console.log(error.response.status);
-                    console.log(error.response.data);
                     dispatch(ACTIONS.updateErrMsg(error.response.data.message));
                 })
         }
@@ -91,14 +79,11 @@ export const ACTIONS = {
             .then(res => {
                 console.log(res)
                 if (res.data.signedUp) {
-                    console.log(res.data.username);
                     // dispatch(ACTIONS.signUp(res.data.username));
                     dispatch(ACTIONS.regularLogin(username,password))
                 }
             })
             .catch(error => {
-                console.log(error.response.status);
-                console.log(error.response.data);
                 dispatch(ACTIONS.updateErrMsg(error.response.data.message));
             })
     }
@@ -118,7 +103,6 @@ export const ACTIONS = {
       Axios.get("/api/posts")
       .then(res => {
         console.log("Getting all posts done.")
-        console.log(res.data);
         dispatch(ACTIONS.updateLocalPosts(res.data))
       })
       .catch(error => console.log(error));
@@ -169,7 +153,6 @@ export const ACTIONS = {
         Axios.get("api/posts")
             .then(res => {
               console.log("GET after POST")
-              console.log(res.data);
               dispatch(ACTIONS.deleteLocalPost(res.data));
         })
             .catch(error => console.log(error))
@@ -189,7 +172,6 @@ export const ACTIONS = {
         Axios.get("/api/posts")
             .then(res => {
               console.log("GET after Put")
-              console.log(res.data);
               dispatch(ACTIONS.modifyLocalPost(res.data));
             })
             .catch(error => console.log(error))
@@ -203,7 +185,6 @@ export const ACTIONS = {
       Axios.get("/api/comments",{params: {postID: postID}})
           .then(res => {
             console.log("Getting all comments done.")
-            console.log(res.data);
             dispatch(ACTIONS.updateLocalComments(res.data))
           })
           .catch(error => console.log(error));
@@ -220,7 +201,6 @@ export const ACTIONS = {
             Axios.get("/api/comments?postID="+postID)
                 .then(res => {
                   console.log("GET after POST")
-                  console.log(res.data);
                   dispatch(ACTIONS.addCommentsToLocal(res.data));
                 })
                 .catch(error => console.log(error))
@@ -234,13 +214,12 @@ export const ACTIONS = {
             Axios.delete("/api/comments",{params: {postID: postID,commentID:commentID}}).
             then(res =>{
                 console.log('delete by post id and comment id.');
-                Axios.get("api/comments",{params: {postID: postID}})
-                    .then(res => {
-                        console.log("GET after comment")
-                        console.log(res.data);
-                        dispatch(ACTIONS.deleteLocalComments(res.data));
-                    })
-                    .catch(error => console.log(error))
+                // Axios.get("api/comments",{params: {postID: postID}})
+                //     .then(res => {
+                //         console.log("GET after comment")
+                //         dispatch(ACTIONS.deleteLocalComments(res.data));
+                //     })
+                //     .catch(error => console.log(error))
             })
                 .catch(error => console.log(error));
         }
@@ -254,7 +233,6 @@ export const ACTIONS = {
                 Axios.get("/api/comments?postID="+postID)
                     .then(res => {
                         console.log("GET after Put")
-                        console.log(res.data);
                         dispatch(ACTIONS.modifyLocalComments(res.data));
                     })
                     .catch(error => console.log(error))

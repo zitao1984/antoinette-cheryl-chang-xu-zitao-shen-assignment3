@@ -18,10 +18,10 @@ const Comment = (props) => {
   const user = useSelector((state) => state.user);
 
   const time = new Date(props.comment.timestamp);
-  console.log(time);
+
 
   const canSubmit = user === props.comment.username;
-  console.log(props.postID);
+
 
   return (
     <div
