@@ -1,6 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import PostModifer from "./PostModifier";
-import { NOTE_TYPE } from "../redux/stateConstants";
+
 
 /**
  *

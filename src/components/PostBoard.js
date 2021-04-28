@@ -1,11 +1,7 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { ACTIONS } from "../redux/actions";
+import React from "react";
+import { useSelector } from "react-redux";
 import Post from "./Post";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReply, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
-import { LOGIN_STATE } from "../redux/stateConstants";
 
 /**
  *
@@ -16,7 +12,6 @@ import { LOGIN_STATE } from "../redux/stateConstants";
 
 const PostBoard = () => {
   const currentPosts = useSelector((state) => state.posts.posts);
-  console.log(currentPosts);
 
   return (
     <div className="main-container padding-10">

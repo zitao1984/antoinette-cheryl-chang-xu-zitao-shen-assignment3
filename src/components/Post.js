@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
-
 import { ACTIONS } from "../redux/actions";
 import PostModifyWindow from "./PostModifyWindow";
 import { useSelector } from "react-redux";
-
 import { useDispatch } from "react-redux";
 import { NOTE_TYPE } from "../redux/stateConstants";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import CommentBoard from "./CommentBoard";
-import PostBoard from "./PostBoard";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots, faNewspaper } from "@fortawesome/free-solid-svg-icons";
 
@@ -35,11 +31,10 @@ const Post = (props) => {
       checkUrl(props.post.url);
     }
   }, [props.post]);
-  console.log(url)
+
 
   const time = new Date(props.post.timestamp);
-  console.log(user);
-  console.log(props.post.username);
+
 
   const canSubmit = user === props.post.username;
 
@@ -69,7 +64,7 @@ const Post = (props) => {
           {props.post.type === NOTE_TYPE.TEXT ? (
             <div>
               <Link to={"/posttext/" + props.postID}>
-                <h3 type="button" className="card-text mt-3 message">
+                <h3 className="card-text mt-3 message">
                   {props.post.title}
                 </h3>
               </Link>
@@ -100,7 +95,7 @@ const Post = (props) => {
                 </Link>
               </div>
             ) : (
-              <div></div>
+              ""
             )}
 
             {canSubmit ? (
@@ -115,7 +110,7 @@ const Post = (props) => {
                 </button>
               </div>
             ) : (
-              <div></div>
+              ""
             )}
 
             {canSubmit ? (
@@ -136,7 +131,7 @@ const Post = (props) => {
                 />
               </div>
             ) : (
-              <div></div>
+              ""
             )}
           </div>
         </div>

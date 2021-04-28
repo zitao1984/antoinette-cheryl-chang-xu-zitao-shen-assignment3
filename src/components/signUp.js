@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ACTIONS, validateUser } from "../redux/actions";
-import { LOGIN_STATE } from "../redux/stateConstants";
+import { ACTIONS} from "../redux/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -11,11 +10,6 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const errMsg = useSelector((state) => state.login.errMsg);
-  const loginState = useSelector((state) => state.login.loginState);
-
-  const state = useSelector((state) => state);
-  console.log(state);
-
   const dispatch = useDispatch();
 
   const handleLogin = () => {

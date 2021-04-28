@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ACTIONS, validateUser } from "../redux/actions";
+import { ACTIONS} from "../redux/actions";
 import { LOGIN_STATE } from "../redux/stateConstants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { propTypes } from "react-bootstrap/esm/Image";
+
 
 let editingBegun = false;
 
@@ -41,7 +41,6 @@ const Login = () => {
     <div className="main-container padding-10">
       <div className={"title"}>
         {loginState === LOGIN_STATE.LOGGED_IN ? (
-          //   <div className="post-generator my-3 post-card">
           <div className="title">
             <h1 className="text-center">
               Welcome back, {user}! <FontAwesomeIcon icon={faUser} />
@@ -92,7 +91,6 @@ const Login = () => {
                   type="password"
                   id="password"
                   name="password"
-                  x
                   className="form-control"
                   value={password}
                   onChange={(e) => {

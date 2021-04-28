@@ -2,11 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTIONS } from "../redux/actions";
 import CommentCreator from "./CommentCreator";
-
 import Comment from "./Comment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faReply, faEnvelopeOpen } from "@fortawesome/free-solid-svg-icons";
-import { LOGIN_STATE } from "../redux/stateConstants";
+import { faReply } from "@fortawesome/free-solid-svg-icons";
+
 
 /**
  *
@@ -24,11 +23,7 @@ const CommentBoard = (props) => {
 
   const currentComments = useSelector((state) => state.comments.comments);
 
-  const time = new Date(props.post.timestamp);
-  console.log(props.postID);
 
-  const state = useSelector((state) => state);
-  console.log(state);
 
   return (
     <div className="main-container padding-30">

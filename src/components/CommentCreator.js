@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTIONS } from "../redux/actions";
-import { LOGIN_STATE } from "../redux/stateConstants";
+
 
 /**
  *
@@ -43,20 +43,17 @@ const CommentCreator = (props) => {
   const canSubmit = message.isValid && loginState === "logged in";
 
   const onSubmit = () => {
-    console.log(message.message);
     let newComment = {
       // userID: user.id,
       username: user,
       text: message.message,
       timestamp: new Date().getTime(),
     };
-    console.log(newComment);
     if (props.commentID === "0") {
       dispatch(ACTIONS.addComments(props.postID, newComment));
     } else {
-      dispatch(
-        ACTIONS.modifyComment(props.postID, props.commentID, newComment)
-      );
+      dispatch(ACTIONS.modifyComment(props.postID, props.commentID, newComment));
+          dispatch(ACTIONS.getComments(props.postID));
       props.onHide(false);
     }
     clearForm();

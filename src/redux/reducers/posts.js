@@ -27,8 +27,6 @@ export const postReducer = (state = INITIAL_STATE, action) => {
             return {
                 posts:action.payload.posts,
             }
-        // case ACTION_TYPES.LOGOUT:
-        //     return INITIAL_STATE;
         default:
             return state;
     }

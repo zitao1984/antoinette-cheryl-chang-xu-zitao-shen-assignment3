@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import CommentCreator from "./CommentCreator";
 import { ACTIONS } from "../redux/actions";
 import CommentModifyWindow from "./CommentModifyWindow";
 import { useDispatch } from "react-redux";
@@ -16,12 +15,9 @@ const Comment = (props) => {
   const [modifyStatus, setModifyStatus] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
   const time = new Date(props.comment.timestamp);
-  console.log(time);
-
   const canSubmit = user === props.comment.username;
-  console.log(props.postID);
+
 
   return (
     <div
@@ -61,7 +57,9 @@ const Comment = (props) => {
             type="submit"
             disabled={!canSubmit}
             onClick={() =>
-              dispatch(ACTIONS.deleteComment(props.postID, props.commentID))
+                (dispatch(ACTIONS.deleteComment(props.postID, props.commentID),
+                  dispatch(ACTIONS.getComments(props.postID)))
+              )
             }
           >
             Delete{" "}

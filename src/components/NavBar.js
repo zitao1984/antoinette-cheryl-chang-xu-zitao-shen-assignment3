@@ -1,18 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useState, useSelector } from "react-redux";
+import { useDispatch,  useSelector } from "react-redux";
 import { ACTIONS } from "../redux/actions";
-import { emptyPost, LOGIN_STATE } from "../redux/stateConstants";
+import { LOGIN_STATE } from "../redux/stateConstants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCog } from "@fortawesome/free-solid-svg-icons";
 
-const NavBar = (props) => {
+const NavBar = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const loginState = useSelector((state) => state.login.loginState);
-  // const postID = props.match.params.postID;
-  const postID = "0";
-  const post = emptyPost;
+
+
 
   return (
     <div className="nav">
