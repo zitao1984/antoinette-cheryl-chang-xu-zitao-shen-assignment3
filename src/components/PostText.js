@@ -20,22 +20,10 @@ const PostText = (props) => {
   }
   // Convert the allPosts object into a map to get post object by postID
   const allPostsMap = new Map(Object.entries(allPosts));
-
   const currentPost = allPostsMap.get(postID);
 
   let postExists = currentPost;
-  const changeUrl=() => {
-    if (currentPost.url === undefined) {
-    } else if (currentPost.url.substring(0, 8) === "https://") {
-      return (currentPost.url.substring("https://".length));
-    } else if (currentPost.url.substring(0, 7) === "http://") {
-      return (currentPost.url.substring("http://".length));
-    } else {
-      return (currentPost.url);
-    }
-  }
 
-  const url= changeUrl();
 
   return (
     <div>
@@ -75,11 +63,11 @@ const PostText = (props) => {
                 <h5 className="card-subtitle">By: {currentPost.username} </h5>
                 {
                   currentPost.type === NOTE_TYPE.LINK ? (
-                  <a href={"//" + url}>
+
                     <p className="card-text mt-3 thread-p ">
                       {currentPost.url}
                     </p>
-                  </a>
+
                 ) : (
                   <p className="card-text mt-3 thread-p ">{currentPost.text}</p>
                 )}
